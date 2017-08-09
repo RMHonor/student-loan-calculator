@@ -3,7 +3,8 @@
   "rules": {
     "no-debugger": "warn",
     "class-method-use-this": "off",
-    "spaced-comment": "off"
+    "spaced-comment": "off",
+    "react/prop-types": "off"
   },
   "env": {
     "browser": true,
