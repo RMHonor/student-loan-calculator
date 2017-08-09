@@ -9,7 +9,10 @@
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack"
   },
-  "pre-commit": ["test", "lint"],
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RMHonor/student-loan-calculator.git"
@@ -43,7 +46,12 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "babel-preset-stage-1": "^6.24.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.3",
+    "redux-promise": "^0.5.3"
   }
 }

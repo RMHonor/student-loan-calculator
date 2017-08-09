@@ -1,7 +1,9 @@
 {
   "extends": "airbnb",
   "rules": {
-    "no-debugger": ["warn"]
+    "no-debugger": "warn",
+    "class-method-use-this": "off",
+    "spaced-comment": "off"
   },
   "env": {
     "browser": true,
