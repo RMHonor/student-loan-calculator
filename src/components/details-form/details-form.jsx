@@ -13,11 +13,36 @@ class DetailsForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <Field
-          type="text"
-          name="loan"
-          component={Input}
-        />
+        <div className="row">
+          <Field
+            type="text"
+            name="loan"
+            label="Salary"
+            responsiveClass="col-sm-6"
+            component={Input}
+          />
+          <Field
+            type="text"
+            name="loan"
+            label="Salary"
+            responsiveClass="col-sm-6"
+            component={Input}
+          />
+          <Field
+            type="text"
+            name="loan"
+            label="Salary"
+            responsiveClass="col-sm-6"
+            component={Input}
+          />
+          <Field
+            type="text"
+            name="loan"
+            label="Salary"
+            responsiveClass="col-sm-6"
+            component={Input}
+          />
+        </div>
         <button type="submit" className="btn btn-primary">Calculate</button>
       </form>
     );
