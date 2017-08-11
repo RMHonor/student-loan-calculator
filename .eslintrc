@@ -2,7 +2,7 @@
   "extends": "airbnb",
   "rules": {
     "no-debugger": "warn",
-    "class-method-use-this": "off",
+    "class-methods-use-this": "off",
     "spaced-comment": "off",
     "react/prop-types": "off"
   },
