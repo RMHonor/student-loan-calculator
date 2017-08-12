@@ -10,7 +10,7 @@ export default class Input extends Component {
 
   render() {
     const {
-      meta: { /*touched, */error },
+      meta: { touched, error },
       input,
       responsiveClass,
       label,
@@ -19,10 +19,11 @@ export default class Input extends Component {
       ...config
     } = this.props;
 
-    const classes = `${responsiveClass} field`;
+    const containerClass = `${responsiveClass} field`;
+    const inputClass = `field__input${touched && '--touched'}`;
 
     return (
-      <div className={classes}>
+      <div className={containerClass}>
         <div>
           <label
             className="field__label"
@@ -34,7 +35,7 @@ export default class Input extends Component {
           {preAddOn && this.renderAddon(true, preAddOn)}
 
           <input
-            className="field__input"
+            className={inputClass}
             {...config}
             onFocus={evt => evt.target.select()}
           />
