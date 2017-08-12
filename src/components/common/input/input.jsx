@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 export default class Input extends Component {
-  renderAddon(pre, content) {
-    const classes = `field__addon--${pre ? 'pre' : 'post'}`;
+  renderAddon(content) {
+    const classes = 'field__addon';
     return (
       <span className={classes}>{content}</span>
     );
@@ -32,7 +32,7 @@ export default class Input extends Component {
             {label}
           </label>
 
-          {preAddOn && this.renderAddon(true, preAddOn)}
+          {preAddOn && this.renderAddon(preAddOn)}
 
           <input
             className={inputClass}
@@ -40,7 +40,7 @@ export default class Input extends Component {
             onFocus={evt => evt.target.select()}
           />
 
-          {postAddOn && this.renderAddon(false, postAddOn)}
+          {postAddOn && this.renderAddon(postAddOn)}
         </div>
 
         <p className="field__error">{error}</p>

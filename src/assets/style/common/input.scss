@@ -1,0 +1,28 @@
+.field {
+
+  &__label {
+    display: block;
+  }
+
+  &__input {
+
+    &--touched {
+
+    }
+  }
+
+  &__addon {
+
+    &:first-child {
+
+    }
+
+    &:last-child {
+
+    }
+  }
+
+  &__error {
+
+  }
+}
