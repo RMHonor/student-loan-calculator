@@ -1,10 +1,16 @@
 .field {
 
+  &__container {
+    height: 40px;
+  }
+
   &__label {
     display: block;
   }
 
   &__input {
+    height: 100%;
+    border: 1px solid #ddd;
 
     &--touched {
 

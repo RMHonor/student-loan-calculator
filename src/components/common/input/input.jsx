@@ -20,11 +20,11 @@ export default class Input extends Component {
     } = this.props;
 
     const containerClass = `${responsiveClass} field`;
-    const inputClass = `field__input${touched && '--touched'}`;
+    const inputClass = `field__input ${touched ? 'field__input--touched' : ''}`;
 
     return (
       <div className={containerClass}>
-        <div>
+        <div className="field__container">
           <label
             className="field__label"
             htmlFor={config.name}
@@ -36,6 +36,7 @@ export default class Input extends Component {
 
           <input
             className={inputClass}
+            {...input}
             {...config}
             onFocus={evt => evt.target.select()}
           />
