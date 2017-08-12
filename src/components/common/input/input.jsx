@@ -1,51 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Input extends Component {
-  renderAddon(content) {
-    const classes = 'field__addon';
-    return (
-      <span className={classes}>{content}</span>
-    );
-  }
+export default (props) => {
+  const {
+    meta: { touched, error },
+    input,
+    responsiveClass,
+    label,
+    preAddOn,
+    postAddOn,
+    ...config
+  } = props;
 
-  render() {
-    const {
-      meta: { touched, error },
-      input,
-      responsiveClass,
-      label,
-      preAddOn,
-      postAddOn,
-      ...config
-    } = this.props;
+  const containerClass = `${responsiveClass} field`;
+  const inputClass = `field__input ${touched ? 'field__input--touched' : ''}`;
 
-    const containerClass = `${responsiveClass} field`;
-    const inputClass = `field__input ${touched ? 'field__input--touched' : ''}`;
+  return (
+    <div className={containerClass}>
+      <div className="field__container">
+        <label
+          className="field__label"
+          htmlFor={config.name}
+        >
+          {label}
+        </label>
 
-    return (
-      <div className={containerClass}>
-        <div className="field__container">
-          <label
-            className="field__label"
-            htmlFor={config.name}
-          >
-            {label}
-          </label>
+        {preAddOn && <span className="field__addon">{preAddOn}</span>}
 
-          {preAddOn && this.renderAddon(preAddOn)}
+        <input
+          className={inputClass}
+          {...input}
+          {...config}
+          onFocus={evt => evt.target.select()}
+        />
 
-          <input
-            className={inputClass}
-            {...input}
-            {...config}
-            onFocus={evt => evt.target.select()}
-          />
-
-          {postAddOn && this.renderAddon(postAddOn)}
-        </div>
-
-        <p className="field__error">{error}</p>
+        {postAddOn && <span className="field__addon">{postAddOn}</span>}
       </div>
-    );
-  }
-}
+
+      <p className="field__error">{error}</p>
+    </div>
+  );
+};
