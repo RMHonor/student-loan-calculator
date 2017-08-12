@@ -10,39 +10,43 @@ class DetailsForm extends Component {
     this.state = {};
   }
 
+  renderFields() {
+    const fields = {
+      salary: {
+        type: 'number',
+        label: 'Salary',
+        preAddOn: '£',
+      },
+      loan: {
+        type: 'number',
+        label: 'Loan balance',
+      },
+      salaryInc: {
+        type: 'number',
+        label: 'Annual salary increase',
+        defaultValue: '2.5',
+        postAddOn: '%',
+      },
+    };
+    return (
+      <div className="row">
+        {Object.keys(fields).map(k => (
+          <Field
+            {...fields[k]}
+            name={k}
+            key={k}
+            responsiveClass="col-sm-6"
+            component={Input}
+          />
+        ))}
+      </div>
+    );
+  }
+
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <div className="row">
-          <Field
-            type="text"
-            name="loan"
-            label="Salary"
-            responsiveClass="col-sm-6"
-            component={Input}
-          />
-          <Field
-            type="text"
-            name="loan"
-            label="Salary"
-            responsiveClass="col-sm-6"
-            component={Input}
-          />
-          <Field
-            type="text"
-            name="loan"
-            label="Salary"
-            responsiveClass="col-sm-6"
-            component={Input}
-          />
-          <Field
-            type="text"
-            name="loan"
-            label="Salary"
-            responsiveClass="col-sm-6"
-            component={Input}
-          />
-        </div>
+        {this.renderFields()}
         <button type="submit" className="btn btn-primary">Calculate</button>
       </form>
     );
