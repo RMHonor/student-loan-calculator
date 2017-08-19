@@ -16,13 +16,13 @@ export default (props) => {
 
   return (
     <div className={containerClass}>
+      <label
+        className="field__label"
+        htmlFor={config.name}
+      >
+        {label}
+      </label>
       <div className="field__container">
-        <label
-          className="field__label"
-          htmlFor={config.name}
-        >
-          {label}
-        </label>
 
         {preAddOn && <span className="field__addon">{preAddOn}</span>}
 
