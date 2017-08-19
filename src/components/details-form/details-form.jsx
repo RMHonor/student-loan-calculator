@@ -73,7 +73,7 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'simple',
+  form: 'form',
   initialValues: {
     ...getDefaultValues(),
   },
