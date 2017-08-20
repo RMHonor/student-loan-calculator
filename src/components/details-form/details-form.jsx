@@ -59,7 +59,9 @@ class DetailsForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit}>
         {this.renderFields()}
-        <button type="submit" className="btn btn-primary">Calculate</button>
+        <div className="btn-group">
+          <button type="submit" className="btn btn-primary">Calculate</button>
+        </div>
       </form>
     );
   }

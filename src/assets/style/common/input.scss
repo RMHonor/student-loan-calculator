@@ -1,9 +1,11 @@
 .field {
+  width: 300px;
+  margin: 0 auto;
 
   &__container {
     display: flex;
     height: 35px;
-    width: 300px;
+    width: 100%;
   }
 
   &__label {

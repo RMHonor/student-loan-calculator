@@ -8,6 +8,8 @@ import reducers from './reducers';
 
 import Form from './components/details-form/details-form';
 
+import './index.scss';
+
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(
@@ -16,7 +18,7 @@ const store = createStore(reducers, composeEnhancers(
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
+    <div className="form-container">
       <Form />
     </div>
   </Provider>,
