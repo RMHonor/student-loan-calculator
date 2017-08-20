@@ -65,7 +65,7 @@ class DetailsForm extends Component {
     return (
       <form onSubmit={this.handleSubmit} noValidate method="" >
         {this.renderFields()}
-        <Button label="Calculate" />
+        <Button label="Calculate" onClick={this.handleSubmit} />
       </form>
     );
   }
