@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import Input from '../common/input/text/input';
+import TextInput from '../common/input/text/text';
 import Button from '../common/input/button/button';
 
 const fields = {
@@ -49,7 +49,7 @@ class DetailsForm extends Component {
             name={k}
             key={k}
             responsiveClass="col-sm-6"
-            component={Input}
+            component={TextInput}
           />
         ))}
       </div>
