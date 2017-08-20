@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './button.scss';
+
 export default props => (
-  <div className="btn-group">
-    <button className="btn btn-primary">{props.label}</button>
+  <div className="button__container">
+    <button className="button">{props.label}</button>
   </div>
 );
