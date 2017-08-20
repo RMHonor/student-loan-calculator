@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import Input from '../common/input/text/input';
+import Button from '../common/input/button/button';
 
 const fields = {
   salary: {
@@ -59,9 +60,7 @@ class DetailsForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit}>
         {this.renderFields()}
-        <div className="btn-group">
-          <button type="submit" className="btn btn-primary">Calculate</button>
-        </div>
+        <Button label="Calculate" />
       </form>
     );
   }
