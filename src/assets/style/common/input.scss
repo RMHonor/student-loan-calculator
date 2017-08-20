@@ -2,8 +2,8 @@
 
   &__container {
     display: flex;
-    height: 30px;
-    width: 360px;
+    height: 35px;
+    width: 300px;
   }
 
   &__label {
@@ -14,6 +14,7 @@
     width: 100%;
     border: 1px solid $border-grey;
     border-radius: 4px;
+    padding: 5px;
 
     &:not(:first-child) {
       border-top-left-radius: 0;
@@ -33,7 +34,7 @@
   &__addon {
     border: 1px solid $border-grey;
     background-color: $background-grey;
-    line-height: 30px;
+    line-height: 29px;
     padding: 0 10px;
 
     &:first-child {
