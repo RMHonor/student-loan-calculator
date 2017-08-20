@@ -40,6 +40,11 @@ class DetailsForm extends Component {
     this.state = {};
   }
 
+  handleSubmit(evt) {
+    evt.preventDefault();
+    console.log('submitting');
+  }
+
   renderFields() {
     return (
       <div className="row">
@@ -58,7 +63,7 @@ class DetailsForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit}>
+      <form onSubmit={this.handleSubmit} noValidate method="" >
         {this.renderFields()}
         <Button label="Calculate" />
       </form>
