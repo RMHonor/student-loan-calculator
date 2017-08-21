@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextInput from '../common/input/text/text';
 import Button from '../common/input/button/button';
 
-const fields = {
+const inputFields = {
   salary: {
     type: 'number',
     label: 'Salary',
@@ -24,11 +24,11 @@ const fields = {
   },
 };
 
-function getDefaultValues() {
+function getDefaultInputValues() {
   const defaultVals = {};
-  Object.keys(fields).forEach((k) => {
-    defaultVals[k] = fields[k].defaultVal;
-    delete fields[k].defaultVal;
+  Object.keys(inputFields).forEach((k) => {
+    defaultVals[k] = inputFields[k].defaultVal;
+    delete inputFields[k].defaultVal;
   });
 
   return defaultVals;
@@ -48,9 +48,9 @@ class DetailsForm extends Component {
   renderFields() {
     return (
       <div className="row">
-        {Object.keys(fields).map(k => (
+        {Object.keys(inputFields).map(k => (
           <Field
-            {...fields[k]}
+            {...inputFields[k]}
             name={k}
             key={k}
             responsiveClass="col-sm-6"
@@ -81,6 +81,6 @@ export default reduxForm({
   validate,
   form: 'form',
   initialValues: {
-    ...getDefaultValues(),
+    ...getDefaultInputValues(),
   },
 })(DetailsForm);
