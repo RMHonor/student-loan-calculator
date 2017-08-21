@@ -1,6 +1,7 @@
 $directions: top bottom right left;
 
-@for $i from 1 through 100 {
+$i: 0;
+@while $i <= 100 {
   @each $dir in $directions {
     .padding--#{$dir}--#{$i} {
       padding-#{$dir}: #{$i}px;
@@ -10,4 +11,14 @@ $directions: top bottom right left;
       margin-#{$dir}: #{$i}px;
     }
   }
+
+  .padding--#{$i} {
+    padding: #{$i}px
+  }
+
+  .margin--#{$i} {
+    margin: #{$i}px
+  }
+
+  $i: $i + 5;
 }

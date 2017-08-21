@@ -6,6 +6,8 @@ import TextInput from '../common/input/text/text';
 import Dropdown from '../common/input/dropdown/dropdown';
 import Button from '../common/input/button/button';
 
+import './details-form.scss';
+
 const inputFields = {
   salary: {
     type: 'number',
@@ -76,10 +78,12 @@ class DetailsForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} noValidate method="">
-        {this.renderFields()}
-        <Button label="Calculate" onClick={this.handleSubmit} />
-      </form>
+      <div className="margin--25 form-container padding--10">
+        <form onSubmit={this.handleSubmit} noValidate method="">
+          {this.renderFields()}
+          <Button label="Calculate" onClick={this.handleSubmit} />
+        </form>
+      </div>
     );
   }
 }
