@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import TextInput from '../common/input/text/text';
+import Dropdown from '../common/input/dropdown/dropdown';
 import Button from '../common/input/button/button';
 
 const inputFields = {
@@ -46,6 +47,10 @@ class DetailsForm extends Component {
   }
 
   renderFields() {
+    const dropdownOptions = [];
+    for (let i = 2015; i < new Date().getFullYear() + 3; i += 1) {
+      dropdownOptions.push({ value: i, displayValue: i });
+    }
     return (
       <div className="row">
         {Object.keys(inputFields).map(k => (
@@ -57,13 +62,21 @@ class DetailsForm extends Component {
             component={TextInput}
           />
         ))}
+        <Field
+          default="Select year"
+          options={dropdownOptions}
+          label="Graduation year"
+          responsiveClass="col-sm-6"
+          name="gradYear"
+          component={Dropdown}
+        />
       </div>
     );
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} noValidate method="" >
+      <form onSubmit={this.handleSubmit} noValidate method="">
         {this.renderFields()}
         <Button label="Calculate" onClick={this.handleSubmit} />
       </form>
