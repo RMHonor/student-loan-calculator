@@ -51,7 +51,7 @@ class DetailsForm extends Component {
   renderFields() {
     const dropdownOptions = [];
     for (let i = 2015; i < new Date().getFullYear() + 3; i += 1) {
-      dropdownOptions.push({ value: i, displayValue: i });
+      dropdownOptions.push({ value: i, label: i });
     }
     return (
       <div className="row">
@@ -65,7 +65,7 @@ class DetailsForm extends Component {
           />
         ))}
         <Field
-          default="Select year"
+          defaultVal="Select year"
           options={dropdownOptions}
           label="Graduation year"
           responsiveClass="col-sm-6"

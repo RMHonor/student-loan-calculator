@@ -6,6 +6,7 @@ export default (props) => {
     input,
     responsiveClass,
     label,
+    defaultVal,
     ...config
   } = props;
   return (
@@ -14,9 +15,9 @@ export default (props) => {
         <label htmlFor={config.name} className="field__label">{props.label}</label>
         <div className="field__container">
           <select className="field__input" {...input}>
-            <option disabled hidden>{props.default}</option>
+            <option hidden>{defaultVal}</option>
             {props.options.map(el => (
-              <option key={el.value} value={el.value}>{el.displayValue}</option>
+              <option key={el.value} value={el.value}>{el.label}</option>
             ))}
           </select>
         </div>
