@@ -1,0 +1,13 @@
+$directions: top bottom right left;
+
+@for $i from 1 through 100 {
+  @each $dir in $directions {
+    .padding--#{$dir}--#{$i} {
+      padding-#{$dir}: #{$i}px;
+    }
+
+    .margin--#{$dir}--#{$i} {
+      margin-#{$dir}: #{$i}px;
+    }
+  }
+}
