@@ -52,6 +52,7 @@
   "dependencies": {
     "babel-preset-stage-1": "^6.24.1",
     "bootstrap-grid": "^2.0.1",
+    "classnames": "^2.2.5",
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

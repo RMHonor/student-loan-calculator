@@ -1,8 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export default (props) => {
   const {
-    meta: { touched, error },
+    meta: { touched, error, active, valid },
     input,
     responsiveClass,
     label,
@@ -11,7 +12,14 @@ export default (props) => {
     ...config
   } = props;
 
-  const inputClass = `field__input ${touched ? 'field__input--touched' : ''}`;
+  let element;
+  const containerClass =
+    classNames(
+      element = 'field__container',
+      { [`${element}--active`]: active },
+      { [`${element}--valid`]: valid && touched && !active },
+      { [`${element}--error`]: touched && error && !active },
+    );
 
   return (
     <div className={responsiveClass}>
@@ -22,15 +30,14 @@ export default (props) => {
         >
           {label}
         </label>
-        <div className="field__container">
+        <div className={containerClass}>
 
           {preAddOn && <span className="field__addon">{preAddOn}</span>}
 
           <input
-            className={inputClass}
+            className="field__input"
             {...input}
             {...config}
-            onFocus={evt => evt.target.select()}
           />
 
           {postAddOn && <span className="field__addon">{postAddOn}</span>}

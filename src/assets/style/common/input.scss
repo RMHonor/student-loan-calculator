@@ -1,3 +1,9 @@
+$placeholder-grey: #797575;
+$border-grey: #cecece;
+$border-active: blue;
+$border-error: red;
+$border-valid: green;
+
 .field {
   width: 300px;
   margin: 0 auto;
@@ -6,6 +12,18 @@
     display: flex;
     height: 35px;
     width: 100%;
+
+    &--valid {
+      box-shadow: 0 0 5px $border-valid, inset 0 0 2px $border-valid;
+    }
+
+    &--error {
+      box-shadow: 0 0 5px $border-error, inset 0 0 2px $border-error;
+    }
+
+    &--active {
+      box-shadow: 0 0 5px $border-active, inset 0 0 2px $border-active;
+    }
   }
 
   &__label {
@@ -30,12 +48,13 @@
       border-bottom-right-radius: 0;
     }
 
-    &--touched {
-
-    }
 
     &--unselected {
       color: $placeholder-grey;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
