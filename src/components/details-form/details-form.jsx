@@ -13,11 +13,13 @@ const inputFields = {
     type: 'number',
     label: 'Salary',
     preAddOn: '£',
+    placeholder: 'Gross annual income',
   },
   loan: {
     type: 'number',
     label: 'Loan balance',
     preAddOn: '£',
+    placeholder: 'Current balance of your loan',
   },
   salaryInc: {
     type: 'number',

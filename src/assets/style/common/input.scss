@@ -33,6 +33,10 @@
     &--touched {
 
     }
+
+    &--unselected {
+      color: $placeholder-grey;
+    }
   }
 
   &__addon {
