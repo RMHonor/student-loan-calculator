@@ -14,18 +14,23 @@ const inputFields = {
     label: 'Salary',
     preAddOn: '£',
     placeholder: 'Gross annual income',
+    onFocus: () => {},
   },
   loan: {
     type: 'number',
     label: 'Loan balance',
     preAddOn: '£',
     placeholder: 'Current balance of your loan',
+    onFocus: () => {},
   },
   salaryInc: {
     type: 'number',
     label: 'Annual salary increase',
     defaultVal: '2.5',
     postAddOn: '%',
+    onFocus: (evt) => {
+      evt.target.select();
+    },
   },
 };
 
