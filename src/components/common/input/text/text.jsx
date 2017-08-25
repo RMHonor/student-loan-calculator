@@ -16,7 +16,7 @@ export default (props) => {
   const containerClass =
     classNames(
       element = 'field__container',
-      { [`${element}--error`]: touched && typeof error === 'string' },
+      { [`${element}--error`]: touched && error },
     );
 
   return (
@@ -41,7 +41,7 @@ export default (props) => {
           {postAddOn && <span className="field__addon">{postAddOn}</span>}
         </div>
 
-        <p className="field__error">{error}</p>
+        {touched && error && <p className="field__error">{error}</p>}
       </div>
     </div>
   );

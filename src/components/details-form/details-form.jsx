@@ -26,7 +26,7 @@ const inputFields = [
         return 'Please enter a positive value';
       }
 
-      return true;
+      return null;
     },
   },
   {
@@ -46,7 +46,7 @@ const inputFields = [
         return 'Please enter a positive value';
       }
 
-      return true;
+      return null;
     },
   },
   {
