@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 export default (props) => {
   const {
-    meta: { touched, error, active, valid },
+    meta: { touched, error },
     input,
     responsiveClass,
     label,
@@ -16,9 +16,7 @@ export default (props) => {
   const containerClass =
     classNames(
       element = 'field__container',
-      { [`${element}--active`]: active },
-      { [`${element}--valid`]: valid && touched && !active },
-      { [`${element}--error`]: touched && error && !active },
+      { [`${element}--error`]: touched && typeof error === 'string' },
     );
 
   return (

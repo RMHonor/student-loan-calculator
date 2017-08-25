@@ -2,7 +2,7 @@ $placeholder-grey: #797575;
 $border-grey: #cecece;
 $border-active: blue;
 $border-error: red;
-$border-valid: green;
+$background-active: #f3f3f3;
 
 .field {
   width: 300px;
@@ -13,16 +13,8 @@ $border-valid: green;
     height: 35px;
     width: 100%;
 
-    &--valid {
-      box-shadow: 0 0 5px $border-valid, inset 0 0 2px $border-valid;
-    }
-
     &--error {
       box-shadow: 0 0 5px $border-error, inset 0 0 2px $border-error;
-    }
-
-    &--active {
-      box-shadow: 0 0 5px $border-active, inset 0 0 2px $border-active;
     }
   }
 
@@ -54,6 +46,7 @@ $border-valid: green;
     }
 
     &:focus {
+      background-color: $background-active;
       outline: none;
     }
   }
