@@ -8,37 +8,66 @@ import Button from '../common/input/button/button';
 
 import './details-form.scss';
 
-const inputFields = {
-  salary: {
-    type: 'number',
-    label: 'Salary',
-    preAddOn: '£',
-    placeholder: 'Gross annual income',
-    onFocus: () => {},
-  },
-  loan: {
-    type: 'number',
-    label: 'Loan balance',
-    preAddOn: '£',
-    placeholder: 'Current balance of your loan',
-    onFocus: () => {},
-  },
-  salaryInc: {
-    type: 'number',
-    label: 'Annual salary increase',
-    defaultVal: '2.5',
-    postAddOn: '%',
-    onFocus: (evt) => {
-      evt.target.select();
+const inputFields = [
+  {
+    meta: {
+      name: 'salary',
+      type: 'number',
+      label: 'Salary',
+      preAddOn: '£',
+      placeholder: 'Gross annual income',
+      onFocus: () => {
+      },
+    },
+    validate: (value) => {
+      if (!value) {
+        return 'Please enter a value';
+      } else if (value < 0) {
+        return 'Please enter a positive value';
+      }
+
+      return true;
     },
   },
-};
+  {
+    meta: {
+      name: 'loan',
+      type: 'number',
+      label: 'Loan balance',
+      preAddOn: '£',
+      placeholder: 'Current balance of your loan',
+      onFocus: () => {
+      },
+    },
+    validate: (value) => {
+      if (!value) {
+        return 'Please enter a value';
+      } else if (value < 0) {
+        return 'Please enter a positive value';
+      }
+
+      return true;
+    },
+  },
+  {
+    meta: {
+      name: 'salaryInc',
+      type: 'number',
+      label: 'Annual salary increase',
+      postAddOn: '%',
+      onFocus: (evt) => {
+        evt.target.select();
+      },
+    },
+    defaultVal: '2.5',
+    validate: value => !value && 'Please enter a value',
+  },
+];
 
 function getDefaultInputValues() {
   const defaultVals = {};
-  Object.keys(inputFields).forEach((k) => {
-    defaultVals[k] = inputFields[k].defaultVal;
-    delete inputFields[k].defaultVal;
+  inputFields.forEach((input) => {
+    defaultVals[input.meta.name] = input.defaultVal;
   });
 
   return defaultVals;
@@ -62,11 +91,10 @@ class DetailsForm extends Component {
     }
     return (
       <div className="row">
-        {Object.keys(inputFields).map(k => (
+        {inputFields.map(input => (
           <Field
-            {...inputFields[k]}
-            name={k}
-            key={k}
+            {...input.meta}
+            key={input.meta.name}
             responsiveClass="col-sm-6"
             component={TextInput}
           />
@@ -96,9 +124,10 @@ class DetailsForm extends Component {
 }
 
 function validate(values) {
-  return {
-    ...!values.loan && { loan: 'Please enter a value' },
-  };
+  return Object.assign(
+    {},
+    ...inputFields.map(input => ({ [input.meta.name]: input.validate(values[input.meta.name]) })),
+  );
 }
 
 export default reduxForm({
