@@ -2,6 +2,15 @@ $directions: top bottom right left;
 
 $i: 0;
 @while $i <= 100 {
+
+  .padding--#{$i} {
+    padding: #{$i}px
+  }
+
+  .margin--#{$i} {
+    margin: #{$i}px
+  }
+
   @each $dir in $directions {
     .padding--#{$dir}--#{$i} {
       padding-#{$dir}: #{$i}px;
@@ -10,14 +19,6 @@ $i: 0;
     .margin--#{$dir}--#{$i} {
       margin-#{$dir}: #{$i}px;
     }
-  }
-
-  .padding--#{$i} {
-    padding: #{$i}px
-  }
-
-  .margin--#{$i} {
-    margin: #{$i}px
   }
 
   $i: $i + 5;

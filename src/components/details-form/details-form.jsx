@@ -113,7 +113,7 @@ class DetailsForm extends Component {
 
   render() {
     return (
-      <div className="margin--25 form-container padding--10">
+      <div className="form-container padding--20 padding--top--0">
         <form onSubmit={this.handleSubmit} noValidate method="">
           {this.renderFields()}
           <Button label="Calculate" onClick={this.handleSubmit} />

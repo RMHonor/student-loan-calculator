@@ -18,7 +18,9 @@ const store = createStore(reducers, composeEnhancers(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Form />
+    <div className="container">
+      <Form />
+    </div>
   </Provider>,
   document.querySelector('#root'),
 );
