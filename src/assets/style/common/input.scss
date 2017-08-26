@@ -1,17 +1,19 @@
 $placeholder-grey: #797575;
 $border-grey: #cecece;
-$border-active: blue;
-$border-error: red;
+$border-error: #ff0000;
+$inline-error: #dc0000;
 $background-active: #f3f3f3;
 
 .field {
   width: 300px;
+  height: 95px;
   margin: 0 auto;
 
   &__container {
     display: flex;
     height: 35px;
     width: 100%;
+    border-radius: 4px;
 
     &--error {
       box-shadow: 0 0 5px $border-error, inset 0 0 2px $border-error;
@@ -19,6 +21,10 @@ $background-active: #f3f3f3;
   }
 
   &__label {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 7px;
+    display: block;
   }
 
   &__input {
@@ -71,6 +77,8 @@ $background-active: #f3f3f3;
   }
 
   &__error {
-
+    margin-top: 4px;
+    font-size: 13px;
+    color: $inline-error;
   }
 }
