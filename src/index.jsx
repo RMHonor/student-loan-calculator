@@ -19,6 +19,9 @@ const store = createStore(reducers, composeEnhancers(
 ReactDOM.render(
   <Provider store={store}>
     <div className="container">
+      <div className="heading">
+        <h1 className="heading__h1 padding--10">Student Loan Calculator</h1>
+      </div>
       <Form />
     </div>
   </Provider>,
