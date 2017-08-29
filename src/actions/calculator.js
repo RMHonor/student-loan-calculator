@@ -7,3 +7,7 @@ export default function (details) {
     payload: details,
   };
 }
+
+export function getMonthPayment(salary, threshold) {
+  return Math.max((salary - threshold) * 0.09) / 12;
+}
