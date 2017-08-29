@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import TextInput from '../common/input/text/text';
 import Dropdown from '../common/input/dropdown/dropdown';
 import Button from '../common/input/button/button';
+
+import calculate from '../../actions/calculator';
 
 import './details-form.scss';
 
@@ -77,11 +79,12 @@ class DetailsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log('submitting');
+    this.props.calculate('test');
   }
 
   renderFields() {
@@ -136,4 +139,4 @@ export default reduxForm({
   initialValues: {
     ...getDefaultInputValues(),
   },
-})(DetailsForm);
+})(connect(null, { calculate })(DetailsForm));
