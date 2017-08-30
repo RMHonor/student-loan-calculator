@@ -1,12 +1,11 @@
-/*eslint-disable*/
-
 import {
   getMonthlyPayment,
 } from './calculator';
 
+/*eslint-disable no-undef*/
+
 describe('Loan Calculator - ', () => {
   describe('getMonthlyPayment - ', () => {
-
     it('should return 0 if salary below threshold', () => {
       const payment = getMonthlyPayment(1000, 1200);
 
