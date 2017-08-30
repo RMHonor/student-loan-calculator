@@ -1,6 +1,6 @@
 /*eslint-disable*/
 
-import calculator, {
+import {
   getMonthlyPayment,
 } from './calculator';
 
