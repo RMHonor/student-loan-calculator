@@ -8,6 +8,6 @@ export default function (details) {
   };
 }
 
-export function getMonthPayment(salary, threshold) {
-  return Math.max((salary - threshold) * 0.09) / 12;
+export function getMonthlyPayment(salary, threshold) {
+  return Math.max((salary - threshold) * 0.09, 0);
 }
