@@ -5,6 +5,7 @@
   "main": "src/index.jsx",
   "scripts": {
     "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
+    "test:watch": "karma start ./karma.conf.js",
     "lint": "eslint ./webpack.config.js ./src/**/*.jsx ./src/**/*.js",
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack"
