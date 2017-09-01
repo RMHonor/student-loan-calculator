@@ -1,6 +1,7 @@
 import {
-  getMonthlyPayment,
+  getSalaryIncrease,
   getInterest,
+  getMonthlyPayment,
   calculateMonthBalanceChange,
 } from './calculator';
 
@@ -89,6 +90,20 @@ describe('Loan Calculator', () => {
       const balance = calculateMonthBalanceChange(100, 200, 0);
 
       expect(balance).to.equal(-100);
+    });
+  });
+
+  describe('getSalaryIncrease', () => {
+    it('should return the same if salary increase is 0', () => {
+      const salary = getSalaryIncrease(100, 0);
+
+      expect(salary).to.equal(100);
+    });
+
+    it('should return a 10 extra if 1% increase on 1000 salary', () => {
+      const salary = getSalaryIncrease(1000, 1);
+
+      expect(salary).to.equal(1010);
     });
   });
 });

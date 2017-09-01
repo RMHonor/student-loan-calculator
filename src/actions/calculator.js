@@ -8,6 +8,10 @@ export default function (details) {
   };
 }
 
+export function getSalaryIncrease(salary, increase) {
+  return salary * (1 + (increase / 100));
+}
+
 export function getInterest(salary, lowerThreshold, upperThreshold, inflation) {
   const thresholdRange = upperThreshold - lowerThreshold;
   const salaryAboveThreshold = salary - lowerThreshold;
