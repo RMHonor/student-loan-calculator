@@ -8,11 +8,22 @@ export default function (details) {
   };
 }
 
+// export function getMonthData(balance, salary, lowerThreshold, upperThreshold, inflation) {
+  // const payment = getMonthlyPayment()
+  // return {
+  //   balance: calculateMonthBalanceChange(balance, )
+  // }
+// }
+
 export function getSalaryIncrease(salary, increase) {
   return salary * (1 + (increase / 100));
 }
 
-export function getInterest(salary, lowerThreshold, upperThreshold, inflation) {
+export function getMonthlyPayment(monthlySalary, threshold) {
+  return Math.max((monthlySalary - threshold) * 0.09, 0);
+}
+
+export function getInterestRate(salary, lowerThreshold, upperThreshold, inflation) {
   const thresholdRange = upperThreshold - lowerThreshold;
   const salaryAboveThreshold = salary - lowerThreshold;
 
@@ -21,16 +32,12 @@ export function getInterest(salary, lowerThreshold, upperThreshold, inflation) {
   return (percentIntoThresholdRange * 3) + inflation;
 }
 
-export function getMonthlyPayment(salary, threshold) {
-  return Math.max((salary - threshold) * 0.09, 0);
+export function getMonthInterestPayment(balance, interest) {
+  return Math.max(balance * ((interest / 12) / 100), 0);
 }
 
 export function calculateMonthBalanceChange(balance, payment, interest) {
   const postPaymentBalance = balance - payment;
 
-  if (postPaymentBalance < 0) {
-    return postPaymentBalance;
-  }
-
-  return postPaymentBalance * (1 + ((interest / 12) / 100));
+  return postPaymentBalance + getMonthInterestPayment(postPaymentBalance, interest);
 }
