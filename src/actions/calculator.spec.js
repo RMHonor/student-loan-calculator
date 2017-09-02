@@ -146,9 +146,6 @@ describe('Loan Calculator', () => {
 
       const data = getMonthData(1000, 0, 0, 0, 0);
 
-      console.log(data);
-      console.log(expected);
-
       expect(data).to.deep.equal(expected);
     });
 
