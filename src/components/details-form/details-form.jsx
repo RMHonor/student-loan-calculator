@@ -6,7 +6,7 @@ import TextInput from '../common/input/text/text';
 import Dropdown from '../common/input/dropdown/dropdown';
 import Button from '../common/input/button/button';
 
-import calculate from '../../actions/calculator';
+import calculate from '../../actions/calculator/calculator';
 
 import './details-form.scss';
 
