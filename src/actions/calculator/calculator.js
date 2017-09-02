@@ -1,13 +1,3 @@
-export const CALCULATE_LOAN = 'calculate_loan';
-
-export default function (details) {
-  console.log('dispatch');
-  return {
-    type: CALCULATE_LOAN,
-    payload: details,
-  };
-}
-
 export function getSalaryIncrease(salary, increase) {
   return salary * (1 + (increase / 100));
 }
@@ -59,6 +49,11 @@ export function getMonthData(balance, salary, lowerThreshold, upperThreshold, in
   };
 }
 
-// export function generateLoanData(balance, salary, loanTermsData) {
-//
-// }
+// stub TODO
+export default function generateLoanData(balance, salary, loanTermsData) {
+  return {
+    balance,
+    salary,
+    loanTermsData,
+  };
+}
