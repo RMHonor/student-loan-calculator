@@ -31,6 +31,12 @@ describe('Loan Calculator', () => {
   });
 
   describe('getInterestRate', () => {
+    it('should return 0 if all values are 0', () => {
+      const interest = getInterestRate(0, 0, 0, 0);
+
+      expect(interest).to.equal(0);
+    });
+
     it('should return 3 if salary below lower threshold and inflation is 3', () => {
       const interest = getInterestRate(0, 1, 2, 3);
 
@@ -129,15 +135,19 @@ describe('Loan Calculator', () => {
     });
   });
 
-  xdescribe('getMonthData', () => {
+  describe('getMonthData', () => {
     it('should return the correct object when there is no salary or interest', () => {
       const expected = {
         balance: 1000,
         paid: 0,
-        interest: 0,
+        interestEarned: 0,
+        interestRate: 0,
       };
 
       const data = getMonthData(1000, 0, 0, 0, 0);
+
+      console.log(data);
+      console.log(expected);
 
       expect(data).to.deep.equal(expected);
     });
@@ -146,7 +156,8 @@ describe('Loan Calculator', () => {
       const expected = {
         balance: 1000,
         paid: 0,
-        interest: 0,
+        interestEarned: 0,
+        interestRate: 0,
       };
 
       const data = getMonthData(1000, 500, 1000, 2000, 0);
@@ -158,7 +169,8 @@ describe('Loan Calculator', () => {
       const expected = {
         balance: 1010,
         paid: 0,
-        interest: 10,
+        interestEarned: 10,
+        interestRate: 12,
       };
 
       const data = getMonthData(1000, 500, 1000, 2000, 12);
@@ -170,7 +182,8 @@ describe('Loan Calculator', () => {
       const expected = {
         balance: 101,
         paid: 9,
-        interest: 1,
+        interestEarned: 1,
+        interestRate: 12,
       };
 
       const data = getMonthData(109, 1200, 0, 2400, 10.5);
@@ -182,7 +195,8 @@ describe('Loan Calculator', () => {
       const expected = {
         balance: 101,
         paid: 9,
-        interest: 1,
+        interestEarned: 1,
+        interestRate: 12,
       };
 
       const data = getMonthData(109, 1200, 0, 1000, 9);
@@ -194,7 +208,8 @@ describe('Loan Calculator', () => {
       const expected = {
         balance: 0,
         paid: 1,
-        interest: 0,
+        interestEarned: 0,
+        interestRate: 12,
       };
 
       const data = getMonthData(1, 1200, 0, 1000, 9);

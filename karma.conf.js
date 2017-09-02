@@ -27,6 +27,10 @@ module.exports = (config) => {
 
     reporters: ['mocha'],
 
+    mochaReporter: {
+      showDiff: true,
+    },
+
     webpack: webpackConf,
 
     webpackServer: {
