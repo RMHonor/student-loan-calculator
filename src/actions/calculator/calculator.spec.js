@@ -13,21 +13,25 @@ import {
 describe('Loan Calculator', () => {
   describe('getMonthlyPayment', () => {
     it('should return 0 if salary below threshold', () => {
-      const payment = getMonthlyPayment(1000, 1200);
+      //monthly salary vs. anual threshold
+      const payment = getMonthlyPayment(10, 1200);
 
       expect(payment).to.equal(0);
     });
 
     it('should return 0 if salary equal to threshold', () => {
-      const payment = getMonthlyPayment(1000, 1000);
+      //monthly salary vs. anual threshold
+      const payment = getMonthlyPayment(100, 1200);
 
-      expect(payment).to.equal(0);
+      expect(Math.round(payment)).to.equal(0);
     });
 
     it('should return 9 for 100 over threshold (9% over threshold)', () => {
-      const payment = getMonthlyPayment(1100, 1000);
+      //monthly salary vs. anual threshold
+      const payment = getMonthlyPayment(110, 1200);
 
-      expect(payment).to.equal(9);
+      //closeTo to handle floating point error
+      expect(payment).to.be.closeTo(0.9, 0.001);
     });
   });
 
@@ -216,7 +220,7 @@ describe('Loan Calculator', () => {
     });
   });
 
-  describe.only('getYearData', () => {
+  describe('getYearData', () => {
     it('should contain a full year of months', () => {
       const data = getYearData(0, 40000, 30000, 21000, 41000, 1.6, 3.1);
 
