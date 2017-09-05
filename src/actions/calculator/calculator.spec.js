@@ -224,8 +224,6 @@ describe('Loan Calculator', () => {
     it('should contain a full year of months', () => {
       const data = getYearData(0, 40000, 30000, 21000, 41000, 1.6, 3.1);
 
-      console.log(data);
-
       expect(Object.keys(data).length).to.equal(12);
     });
   });
