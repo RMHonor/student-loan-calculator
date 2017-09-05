@@ -5,6 +5,7 @@ import {
   getMonthInterestPayment,
   getMonthlyPayment,
   calculateMonthBalanceChange,
+  getYearData,
 } from './calculator';
 
 /*eslint-disable no-undef*/
@@ -212,6 +213,16 @@ describe('Loan Calculator', () => {
       const data = getMonthData(1, 1200, 0, 1000, 9);
 
       expect(data).to.deep.equal(expected);
+    });
+  });
+
+  describe.only('getYearData', () => {
+    it('should contain a full year of months', () => {
+      const data = getYearData(0, 40000, 30000, 21000, 41000, 1.6, 3.1);
+
+      console.log(data);
+
+      expect(Object.keys(data).length).to.equal(12);
     });
   });
 });

@@ -3,10 +3,16 @@ export function getSalaryIncrease(salary, increase) {
 }
 
 export function getMonthlyPayment(monthlySalary, threshold) {
-  return Math.max((monthlySalary - threshold) * 0.09, 0);
+  return Math.max((monthlySalary - (threshold / 12)) * 0.09, 0);
+}
+
+export function getPrePaymentInterestRate(inflation) {
+  return inflation + 3;
 }
 
 export function getInterestRate(salary, lowerThreshold, upperThreshold, inflation) {
+  debugger;
+
   const thresholdRange = upperThreshold - lowerThreshold;
   const salaryAboveThreshold = salary - lowerThreshold;
 
@@ -49,11 +55,50 @@ export function getMonthData(balance, salary, lowerThreshold, upperThreshold, in
   };
 }
 
-// stub TODO
-export default function generateLoanData(balance, salary, loanTermsData) {
+export function getYearData(
+  start,
+  balance,
+  salary,
+  lowerThreshold,
+  upperThreshold,
+  aprRPI,
+  septRPI,
+  prePayment,
+) {
+  const res = {};
+  const months = ['apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb', 'mar'];
+
+  for (let i = start; i < 12; i += 1) {
+    const prevBalance = (res[months[i - 1]] && res[months[i - 1]].balance) || balance;
+    const inflation = i < 6 ? aprRPI : septRPI;
+
+    if (prePayment) {
+      res[months[i]] =
+        getMonthData(prevBalance, salary, lowerThreshold, upperThreshold, inflation);
+    } else {
+      const interest = getPrePaymentInterestRate(inflation);
+      res[months[i]] =
+        getMonthData(prevBalance, 0, 0, 0, interest);
+    }
+  }
+
+  return res;
+}
+
+export default function getLoanData(balance, salary, salaryIncrease, gradYear, loanTermsData) {
+  const now = new Date();
+  const response = {};
+  // calculate balance up until april following graduation
+  if (now.getFullYear() <= gradYear) {
+    if (now.getFullYear() < gradYear) {
+      response[now.getFullYear()] = {};
+    }
+  }
+
   return {
     balance,
     salary,
+    salaryIncrease,
     loanTermsData,
   };
 }
