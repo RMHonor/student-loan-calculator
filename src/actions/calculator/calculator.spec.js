@@ -1,4 +1,4 @@
-import {
+import getLoanData, {
   getMonthData,
   getSalaryIncrease,
   getInterestRate,
@@ -7,6 +7,7 @@ import {
   calculateMonthBalanceChange,
   getYearData,
 } from './calculator';
+import loanTerms from './loan-terms';
 
 /*eslint-disable no-undef*/
 
@@ -227,4 +228,12 @@ describe('Loan Calculator', () => {
       expect(Object.keys(data).length).to.equal(12);
     });
   });
+
+  describe('getLoanData', () => {
+    it('should generate up to 30 years of data', () => {
+      const data = getLoanData(40000, 40000, 3, 2016, loanTerms(2016, 2047));
+
+      console.log(data['2030']);
+    });
+  })
 });
