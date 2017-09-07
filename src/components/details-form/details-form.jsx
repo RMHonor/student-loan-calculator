@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import TextInput from '../common/input/text/text';
 import Dropdown from '../common/input/dropdown/dropdown';
 import Button from '../common/input/button/button';
+
+import calculate from '../../actions/calculator/action';
 
 import './details-form.scss';
 
@@ -76,12 +78,11 @@ function getDefaultInputValues() {
 class DetailsForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.submit = this.submit.bind(this);
   }
 
-  handleSubmit(evt) {
-    evt.preventDefault();
-    console.log('submitting');
+  submit(input) {
+    this.props.calculate(input);
   }
 
   renderFields() {
@@ -114,9 +115,9 @@ class DetailsForm extends Component {
   render() {
     return (
       <div className="form-container padding--20 padding--top--0">
-        <form onSubmit={this.handleSubmit} noValidate>
+        <form onSubmit={this.props.handleSubmit(this.submit)} noValidate>
           {this.renderFields()}
-          <Button label="Calculate" onClick={this.handleSubmit} />
+          <Button label="Calculate" onClick={this.props.handleSubmit(this.submit)} />
         </form>
       </div>
     );
@@ -130,10 +131,16 @@ function validate(values) {
   );
 }
 
+function mapStateToProps({ calculator }) {
+  return {
+    calculator,
+  };
+}
+
 export default reduxForm({
   validate,
   form: 'form',
   initialValues: {
     ...getDefaultInputValues(),
   },
-})(DetailsForm);
+})(connect(mapStateToProps, { calculate })(DetailsForm));
