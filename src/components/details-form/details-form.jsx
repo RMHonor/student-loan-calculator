@@ -82,9 +82,7 @@ class DetailsForm extends Component {
   }
 
   submit(input) {
-    console.log(input);
     this.props.calculate(input);
-    console.log(this.props.calculator);
   }
 
   renderFields() {
