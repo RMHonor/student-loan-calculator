@@ -84,6 +84,7 @@ class DetailsForm extends Component {
   submit(input) {
     console.log(input);
     this.props.calculate(input);
+    console.log(this.props.calculator);
   }
 
   renderFields() {
@@ -132,10 +133,16 @@ function validate(values) {
   );
 }
 
+function mapStateToProps({ calculator }) {
+  return {
+    calculator,
+  };
+}
+
 export default reduxForm({
   validate,
   form: 'form',
   initialValues: {
     ...getDefaultInputValues(),
   },
-})(connect(null, { calculate })(DetailsForm));
+})(connect(mapStateToProps, { calculate })(DetailsForm));
