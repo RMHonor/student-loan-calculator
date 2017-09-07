@@ -33,7 +33,15 @@ export function calculateMonthBalanceChange(balance, payment, interest) {
   return postPaymentBalance + getMonthInterestPayment(postPaymentBalance, interest);
 }
 
-export function getMonthData(balance, salary, lowerThreshold, upperThreshold, inflation, prePayment) {
+export function getMonthData(
+  month,
+  balance,
+  salary,
+  lowerThreshold,
+  upperThreshold,
+  inflation,
+  prePayment
+) {
   let paid = getMonthlyPayment(salary / 12, lowerThreshold);
   const interestRate = prePayment
     ? getPrePaymentInterestRate(inflation)
@@ -48,6 +56,7 @@ export function getMonthData(balance, salary, lowerThreshold, upperThreshold, in
   const interestEarned = newBalance - (balance - paid);
 
   return {
+    month,
     balance: newBalance,
     paid,
     interestEarned,
@@ -65,21 +74,45 @@ export function getYearData(
   septRPI,
   prePayment,
 ) {
-  const res = {};
-  const months = ['apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb', 'mar'];
+  const res = {
+    months: [],
+    salary,
+    upperThreshold,
+    lowerThreshold,
+  };
+
+  const months = [
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+    'January',
+    'February',
+    'March'];
 
   for (let i = start; i < 12; i += 1) {
-    const prevBalance = (res[months[i - 1]] && res[months[i - 1]].balance) || balance;
+    const prevBalance = (res.months[i - 1] && res.months[i - 1].balance) || balance;
     const inflation = i < 6 ? aprRPI : septRPI;
 
     if (prePayment) {
-      res[months[i]] =
-        getMonthData(prevBalance, 0, 0, 0, inflation);
+      res.months.push(getMonthData(months[i], prevBalance, 0, 0, 0, inflation));
     } else {
-      res[months[i]] =
-        getMonthData(prevBalance, salary, lowerThreshold, upperThreshold, inflation);
+      res.months.push(
+        getMonthData(months[i], prevBalance, salary, lowerThreshold, upperThreshold, inflation)
+      );
+    }
+
+    if (res.months[res.months.length - 1].balance === 0) {
+      break;
     }
   }
+
+  res.endingBalance = res.months[res.months.length - 1].balance;
 
   return res;
 }
@@ -115,7 +148,10 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
   }
 
   for (let i = now.getFullYear(); i < gradYear + 31; i += 1) {
-    const newBalance = response[i - 1] ? response[i - 1].mar.balance : balance;
+    const newBalance = response[i - 1] ? response[i - 1].endingBalance : balance;
+    if (newBalance === 0) {
+      break;
+    }
     const currentLoanTerms = loanTermsData.find(o => o.year === i);
     const aprRPI = loanTermsData.find(o => o.year === i - 1).rpi;
 

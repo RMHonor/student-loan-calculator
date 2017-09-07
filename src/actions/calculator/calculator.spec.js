@@ -144,78 +144,84 @@ describe('Loan Calculator', () => {
   describe('getMonthData', () => {
     it('should return the correct object when there is no salary or interest', () => {
       const expected = {
+        month: 'Sept',
         balance: 1000,
         paid: 0,
         interestEarned: 0,
         interestRate: 0,
       };
 
-      const data = getMonthData(1000, 0, 0, 0, 0);
+      const data = getMonthData('Sept', 1000, 0, 0, 0, 0);
 
       expect(data).to.deep.equal(expected);
     });
 
     it('should return the correct object with salary below threshold and no interest', () => {
       const expected = {
+        month: 'Sept',
         balance: 1000,
         paid: 0,
         interestEarned: 0,
         interestRate: 0,
       };
 
-      const data = getMonthData(1000, 500, 1000, 2000, 0);
+      const data = getMonthData('Sept', 1000, 500, 1000, 2000, 0);
 
       expect(data).to.deep.equal(expected);
     });
 
     it('should return the correct object with salary below threshold and interest at 12%', () => {
       const expected = {
+        month: 'Sept',
         balance: 1010,
         paid: 0,
         interestEarned: 10,
         interestRate: 12,
       };
 
-      const data = getMonthData(1000, 500, 1000, 2000, 12);
+      const data = getMonthData('Sept', 1000, 500, 1000, 2000, 12);
 
       expect(data).to.deep.equal(expected);
     });
 
     it('should return the correct object with salary inbetween thresholds and interest at 10.5%', () => {
       const expected = {
+        month: 'Sept',
         balance: 101,
         paid: 9,
         interestEarned: 1,
         interestRate: 12,
       };
 
-      const data = getMonthData(109, 1200, 0, 2400, 10.5);
+      const data = getMonthData('Sept', 109, 1200, 0, 2400, 10.5);
 
       expect(data).to.deep.equal(expected);
     });
 
     it('should return the correct object with salary above upper threshold and interest at 9%', () => {
       const expected = {
+        month: 'Sept',
         balance: 101,
         paid: 9,
         interestEarned: 1,
         interestRate: 12,
       };
 
-      const data = getMonthData(109, 1200, 0, 1000, 9);
+      const data = getMonthData('Sept', 109, 1200, 0, 1000, 9);
 
       expect(data).to.deep.equal(expected);
     });
 
     it('should return the correct object if salary means clearing balance', () => {
       const expected = {
+        month: 'Sept',
         balance: 0,
         paid: 1,
         interestEarned: 0,
         interestRate: 12,
       };
 
-      const data = getMonthData(1, 1200, 0, 1000, 9);
+      const data = getMonthData('Sept', 1, 1200, 0, 1000, 9);
 
       expect(data).to.deep.equal(expected);
     });
@@ -225,7 +231,7 @@ describe('Loan Calculator', () => {
     it('should contain a full year of months', () => {
       const data = getYearData(0, 40000, 30000, 21000, 41000, 1.6, 3.1);
 
-      expect(Object.keys(data).length).to.equal(12);
+      expect(data.months.length).to.equal(12);
     });
   });
 

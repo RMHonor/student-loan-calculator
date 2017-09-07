@@ -5,10 +5,12 @@ export const CALCULATE_LOAN = 'calculate_loan';
 
 export default function (details) {
   // stubbed TODO
-  const loanTerms = getLoanTerms(details.graduationYear, details.graduationYear + 31);
-  console.log(calculate(details.loanBalance, details.salary, details.salaryIncrease, loanTerms));
+  const loanTerms = getLoanTerms(+details.gradYear, +details.gradYear + 31);
+  const payload =
+    calculate(+details.loan, +details.salary, +details.salaryInc, +details.gradYear, loanTerms);
+  console.log(payload);
   return {
     type: CALCULATE_LOAN,
-    payload: details,
+    payload,
   };
 }
