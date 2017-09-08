@@ -87,7 +87,7 @@ class DetailsForm extends Component {
 
   renderFields() {
     const dropdownOptions = [];
-    for (let i = 2015; i < new Date().getFullYear() + 3; i += 1) {
+    for (let i = 2015; i <= new Date().getFullYear(); i += 1) {
       dropdownOptions.push({ value: i, label: i });
     }
     return (
