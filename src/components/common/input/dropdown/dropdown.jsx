@@ -1,8 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export default (props) => {
   const {
-    // meta: { touched, error },
+    meta: { touched, error },
     input,
     responsiveClass,
     label,
@@ -10,12 +11,23 @@ export default (props) => {
     ...config
   } = props;
 
-  const inputClass = `field__input ${input.value || 'field__input--unselected'}`;
+  let element;
+  const inputClass = //`field__input ${input.value || 'field__input--unselected'}`;
+  classNames(
+    element = 'field__input',
+    { [`${element}--unselected`]: !input.value },
+  );
+  const containerClass =
+    classNames(
+      element = 'field__container',
+      { [`${element}--error`]: touched && error },
+    );
+
   return (
     <div className={responsiveClass}>
       <div className="field">
         <label htmlFor={config.name} className="field__label">{props.label}</label>
-        <div className="field__container">
+        <div className={containerClass} >
           <select className={inputClass} {...input} >
             <option disabled hidden value="">{defaultVal}</option>
             {props.options.map(el => (
@@ -23,6 +35,8 @@ export default (props) => {
             ))}
           </select>
         </div>
+
+        {touched && error && <p className="field__error">{error}</p>}
       </div>
     </div>
   );
