@@ -127,6 +127,7 @@ class DetailsForm extends Component {
 function validate(values) {
   return Object.assign(
     {},
+    !values.gradYear && { gradYear: 'Please select your graduation year' },
     ...inputFields.map(input => ({ [input.meta.name]: input.validate(values[input.meta.name]) })),
   );
 }
