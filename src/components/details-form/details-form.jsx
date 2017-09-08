@@ -124,11 +124,17 @@ class DetailsForm extends Component {
   }
 }
 
+//TODO improve syntax
 function validate(values) {
-  return Object.assign(
-    {},
-    ...inputFields.map(input => ({ [input.meta.name]: input.validate(values[input.meta.name]) })),
-  );
+  const res = {
+    ...!values.gradYear && { gradYear: 'Please select your graduation year' },
+  };
+
+  inputFields.forEach((el) => {
+    res[el.meta.name] = el.validate(values[el.meta.name]);
+  });
+
+  return res;
 }
 
 function mapStateToProps({ calculator }) {
