@@ -124,13 +124,14 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
   let currentSalary = salary;
   // calculate balance up until april following graduation
   if (now.getFullYear() === gradYear
-    || (now.getFullYear() - 1 === gradYear && now.getMonth() < 3)
+    || (now.getFullYear() - 1 === gradYear && month < 3)
   ) {
-    const startYear = (now.getFullYear() - 1 === gradYear && now.getMonth() < 3)
+    const startYear = (now.getFullYear() - 1 === gradYear && month < 3)
       ? now.getFullYear() - 1
       : now.getFullYear();
     const aprRPI = loanTermsData.find(o => o.year === now.getFullYear() - 1).rpi;
     const septRPI = loanTermsData.find(o => o.year === now.getFullYear()).rpi;
+
     response[startYear] =
       getYearData(
         now.getMonth(),
