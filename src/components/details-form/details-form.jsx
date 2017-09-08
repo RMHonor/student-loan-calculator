@@ -140,7 +140,5 @@ function mapStateToProps({ calculator }) {
 export default reduxForm({
   validate,
   form: 'form',
-  initialValues: {
-    ...getDefaultInputValues(),
-  },
+  initialValues: getDefaultInputValues(),
 })(connect(mapStateToProps, { calculate })(DetailsForm));
