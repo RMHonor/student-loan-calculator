@@ -124,7 +124,6 @@ class DetailsForm extends Component {
   }
 }
 
-//TODO improve syntax
 function validate(values) {
   return Object.assign(
     {},
