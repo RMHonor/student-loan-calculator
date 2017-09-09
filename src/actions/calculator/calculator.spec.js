@@ -236,10 +236,10 @@ describe('Loan Calculator', () => {
   });
 
   describe('getLoanData', () => {
-    it('should generate up to 30 years of data', () => {
-      const data = getLoanData(40000, 40000, 3, 2016, loanTerms(2016, 2047));
+    it('should generate 30 years of data', () => {
+      const data = getLoanData(4000, 40000, 3, 2016, loanTerms(2016, 2047));
 
-      console.log(data['2030']);
+      expect(data.length).to.equal(30);
     });
-  })
+  });
 });
