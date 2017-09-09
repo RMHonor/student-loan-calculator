@@ -40,7 +40,7 @@ export function getMonthData(
   lowerThreshold,
   upperThreshold,
   inflation,
-  prePayment
+  prePayment,
 ) {
   let paid = getMonthlyPayment(salary / 12, lowerThreshold);
   const interestRate = prePayment
@@ -93,7 +93,8 @@ export function getYearData(
     'December',
     'January',
     'February',
-    'March'];
+    'March',
+  ];
 
   for (let i = start; i < 12; i += 1) {
     const prevBalance = (res.months[i - 1] && res.months[i - 1].balance) || balance;
@@ -119,14 +120,14 @@ export function getYearData(
 
 export default function getLoanData(balance, salary, salaryIncrease, gradYear, loanTermsData) {
   const now = new Date();
-  let month = now.getMonth();
+  let month = (now.getMonth() + 9) % 12;
   const response = {};
   let currentSalary = salary;
   // calculate balance up until april following graduation
   if (now.getFullYear() === gradYear
-    || (now.getFullYear() - 1 === gradYear && month < 3)
+    || (now.getFullYear() - 1 === gradYear && month > 9)
   ) {
-    const startYear = (now.getFullYear() - 1 === gradYear && month < 3)
+    const startYear = (now.getFullYear() - 1 === gradYear && month > 9)
       ? now.getFullYear() - 1
       : now.getFullYear();
     const aprRPI = loanTermsData.find(o => o.year === now.getFullYear() - 1).rpi;
@@ -134,7 +135,7 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
 
     response[startYear] =
       getYearData(
-        now.getMonth(),
+        month,
         balance,
         0,
         0,
