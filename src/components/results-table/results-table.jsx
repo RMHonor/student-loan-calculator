@@ -7,19 +7,28 @@ function ResultsTable(props) {
     return null;
   }
 
+  console.log(props.data);
   return (
     <table>
       <thead>
         <tr>
-          <th>
-            Year
-          </th>
+          <th>Year</th>
+          <th>Balance</th>
+          <th>Salary</th>
+          <th>Paid</th>
+          <th>Interest</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Stuff</td>
-        </tr>
+        {props.data.map(year => (
+          <tr key={year.years}>
+            <td>{year.years}</td>
+            <td>{Math.round(year.endingBalance)}</td>
+            <td>{Math.round(year.salary)}</td>
+            <td>{Math.round(year.paid)}</td>
+            <td>{Math.round(year.interest)}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
