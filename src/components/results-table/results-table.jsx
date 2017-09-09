@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 
 
 function ResultsTable(props) {
-  console.log(props.data);
+  if (!props.data) {
+    return null;
+  }
+
   return (
     <table>
       <thead>
