@@ -238,7 +238,7 @@ describe('Loan Calculator', () => {
   describe('getLoanData', () => {
     it('should generate 30 years of data', () => {
       const data = getLoanData(40000, 4000, 3, 2016, loanTerms(2016, 2047));
-      console.log(data);
+
       expect(data.length).to.equal(30);
     });
   });
