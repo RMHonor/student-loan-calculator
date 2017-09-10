@@ -177,6 +177,10 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
       false,
     ));
 
+    if (response[response.length - 1].endingBalance === 0) {
+      break;
+    }
+
     currentSalary = getSalaryIncrease(currentSalary, salaryIncrease);
     month = 0;
   }
