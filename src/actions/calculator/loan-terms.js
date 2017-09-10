@@ -29,7 +29,7 @@ const HISTORIC_RPI = [
 
 // assumed future RPI
 const FUTURE_RPI = {
-  rpi: 2.5,
+  rpi: 2,
 };
 
 /**
