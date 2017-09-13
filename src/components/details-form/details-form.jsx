@@ -37,7 +37,7 @@ const inputFields = [
       type: 'number',
       label: 'Loan balance',
       preAddOn: '£',
-      placeholder: 'Current balance of your loan',
+      placeholder: 'Current loan balance',
       onFocus: () => {
       },
     },
