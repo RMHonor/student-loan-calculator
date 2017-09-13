@@ -7,8 +7,9 @@ function ResultsTable(props) {
   if (!props.data) return null;
 
   return (
-    <div className="margin--bottom--20">
-      <table className="results-table">
+    <div className="results-table margin--bottom--20">
+      <h2 className="results-table__header">Breakdown</h2>
+      <table className="results-table__table">
         <thead>
           <tr>
             <th>Year</th>
