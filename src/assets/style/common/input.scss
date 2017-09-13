@@ -6,6 +6,9 @@ $background-active: #f3f3f3;
 
 .field {
   width: 300px;
+  @media (max-width: $small-mobile-break) {
+    width: 250px;
+  }
   height: 95px;
   margin: 0 auto;
 
