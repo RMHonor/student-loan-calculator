@@ -2,8 +2,8 @@ export function getSalaryIncrease(salary, increase) {
   return salary * (1 + (increase / 100));
 }
 
-export function getMonthlyPayment(monthlySalary, threshold) {
-  return Math.max((monthlySalary - (threshold / 12)) * 0.09, 0);
+export function getMonthlyPayment(salary, threshold) {
+  return Math.max((salary - threshold) * 0.09, 0) / 12;
 }
 
 export function getPrePaymentInterestRate(inflation) {
@@ -42,7 +42,7 @@ export function getMonthData(
   inflation,
   prePayment,
 ) {
-  let paid = getMonthlyPayment(salary / 12, lowerThreshold);
+  let paid = getMonthlyPayment(salary, lowerThreshold);
   const interestRate = prePayment
     ? getPrePaymentInterestRate(inflation)
     : getInterestRate(salary, lowerThreshold, upperThreshold, inflation);
@@ -158,7 +158,8 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
   }
 
   for (let i = year; i < gradYear + 31; i += 1) {
-    const newBalance = response[i - 1] ? response[i - 1].endingBalance : balance;
+    const newBalance =
+      response[response.length - 1] ? response[response.length - 1].endingBalance : balance;
     if (newBalance === 0) {
       break;
     }
@@ -177,12 +178,18 @@ export default function getLoanData(balance, salary, salaryIncrease, gradYear, l
       false,
     ));
 
-    if (response[response.length - 1].endingBalance === 0) {
-      break;
-    }
-
     currentSalary = getSalaryIncrease(currentSalary, salaryIncrease);
     month = 0;
+  }
+
+  for (let i = 0; i < response.length; i += 1) {
+    if (response[i - 1]) {
+      response[i].totalPaid = response[i - 1].totalPaid + response[i].paid;
+      response[i].totalInterest = response[i - 1].totalInterest + response[i].interest;
+    } else {
+      response[i].totalPaid = response[i].paid;
+      response[i].totalInterest = response[i].interest;
+    }
   }
 
   return response;
