@@ -17,6 +17,8 @@ function ResultsTable(props) {
             <th>Salary</th>
             <th>Paid</th>
             <th>Interest</th>
+            <th>Total Paid</th>
+            <th>Total Interest</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +29,8 @@ function ResultsTable(props) {
               <td>£{Math.round(year.salary)}</td>
               <td>£{Math.round(year.paid)}</td>
               <td>£{Math.round(year.interest)}</td>
+              <td>£{Math.round(year.totalPaid)}</td>
+              <td>£{Math.round(year.totalInterest)}</td>
             </tr>
           ))}
         </tbody>
