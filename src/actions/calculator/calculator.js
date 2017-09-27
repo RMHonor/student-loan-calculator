@@ -2,8 +2,8 @@ export function getSalaryIncrease(salary, increase) {
   return salary * (1 + (increase / 100));
 }
 
-export function getMonthlyPayment(monthlySalary, threshold) {
-  return Math.max((monthlySalary - (threshold / 12)) * 0.09, 0);
+export function getMonthlyPayment(salary, threshold) {
+  return Math.max((salary - threshold) * 0.09, 0) / 12;
 }
 
 export function getPrePaymentInterestRate(inflation) {
@@ -40,9 +40,9 @@ export function getMonthData(
   lowerThreshold,
   upperThreshold,
   inflation,
-  prePayment
+  prePayment,
 ) {
-  let paid = getMonthlyPayment(salary / 12, lowerThreshold);
+  let paid = getMonthlyPayment(salary, lowerThreshold);
   const interestRate = prePayment
     ? getPrePaymentInterestRate(inflation)
     : getInterestRate(salary, lowerThreshold, upperThreshold, inflation);
@@ -65,6 +65,7 @@ export function getMonthData(
 }
 
 export function getYearData(
+  year,
   start,
   balance,
   salary,
@@ -93,7 +94,8 @@ export function getYearData(
     'December',
     'January',
     'February',
-    'March'];
+    'March',
+  ];
 
   for (let i = start; i < 12; i += 1) {
     const prevBalance = (res.months[i - 1] && res.months[i - 1].balance) || balance;
@@ -103,7 +105,7 @@ export function getYearData(
       res.months.push(getMonthData(months[i], prevBalance, 0, 0, 0, inflation));
     } else {
       res.months.push(
-        getMonthData(months[i], prevBalance, salary, lowerThreshold, upperThreshold, inflation)
+        getMonthData(months[i], prevBalance, salary, lowerThreshold, upperThreshold, inflation),
       );
     }
 
@@ -112,63 +114,82 @@ export function getYearData(
     }
   }
 
+  res.paid = res.months.reduce((acc, { paid }) => acc + paid, 0);
+  res.interest = res.months.reduce((acc, { interestEarned }) => acc + interestEarned, 0);
   res.endingBalance = res.months[res.months.length - 1].balance;
+  res.years = `${year}/${(year + 1) % 2000}`;
 
   return res;
 }
 
 export default function getLoanData(balance, salary, salaryIncrease, gradYear, loanTermsData) {
+  const response = [];
+
   const now = new Date();
-  let month = now.getMonth();
-  const response = {};
+  let year = now.getFullYear();
+  let month = (now.getMonth() + 9) % 12;
   let currentSalary = salary;
+
   // calculate balance up until april following graduation
   if (now.getFullYear() === gradYear
-    || (now.getFullYear() - 1 === gradYear && now.getMonth() < 3)
+    || (now.getFullYear() - 1 === gradYear && month > 9)
   ) {
-    const startYear = (now.getFullYear() - 1 === gradYear && now.getMonth() < 3)
+    const startYear = (now.getFullYear() - 1 === gradYear && month > 9)
       ? now.getFullYear() - 1
       : now.getFullYear();
     const aprRPI = loanTermsData.find(o => o.year === now.getFullYear() - 1).rpi;
     const septRPI = loanTermsData.find(o => o.year === now.getFullYear()).rpi;
-    response[startYear] =
-      getYearData(
-        now.getMonth(),
-        balance,
-        0,
-        0,
-        1,
-        aprRPI,
-        septRPI,
-        true,
-      );
+
+    response.push(getYearData(
+      startYear,
+      month,
+      balance,
+      currentSalary,
+      0,
+      1,
+      aprRPI,
+      septRPI,
+      true,
+    ));
 
     currentSalary = getSalaryIncrease(salary, salaryIncrease);
     month = 0;
+    year += 1;
   }
 
-  for (let i = now.getFullYear(); i < gradYear + 31; i += 1) {
-    const newBalance = response[i - 1] ? response[i - 1].endingBalance : balance;
+  for (let i = year; i < gradYear + 31; i += 1) {
+    const newBalance =
+      response[response.length - 1] ? response[response.length - 1].endingBalance : balance;
     if (newBalance === 0) {
       break;
     }
     const currentLoanTerms = loanTermsData.find(o => o.year === i);
     const aprRPI = loanTermsData.find(o => o.year === i - 1).rpi;
 
-    response[i] =
-      getYearData(
-        month,
-        newBalance,
-        currentSalary,
-        currentLoanTerms.lowerThreshold,
-        currentLoanTerms.upperThreshold,
-        aprRPI,
-        currentLoanTerms.rpi,
-        false,
-      );
+    response.push(getYearData(
+      i,
+      month,
+      newBalance,
+      currentSalary,
+      currentLoanTerms.lowerThreshold,
+      currentLoanTerms.upperThreshold,
+      aprRPI,
+      currentLoanTerms.rpi,
+      false,
+    ));
 
     currentSalary = getSalaryIncrease(currentSalary, salaryIncrease);
     month = 0;
+  }
+
+  for (let i = 0; i < response.length; i += 1) {
+    if (response[i - 1]) {
+      response[i].totalPaid = response[i - 1].totalPaid + response[i].paid;
+      response[i].totalInterest = response[i - 1].totalInterest + response[i].interest;
+    } else {
+      response[i].totalPaid = response[i].paid;
+      response[i].totalInterest = response[i].interest;
+    }
   }
 
   return response;

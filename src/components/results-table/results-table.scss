@@ -1,0 +1,58 @@
+@import '../../assets/style/settings/breakpoints';
+
+.results-table {
+
+  &__header {
+    text-align: center;
+    font-size: 22px;
+
+    &::after {
+      width: 100px;
+      border-bottom: 1px solid #2991e6;
+    }
+  }
+
+  &__table {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid #dbdbdb;
+
+    & thead {
+      & tr {
+        background-color: #dbdbdb;
+      }
+    }
+
+    & tbody {
+      & tr {
+        &:hover {
+          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        }
+
+        &:nth-of-type(2n + 1) {
+          background-color: white;
+        }
+
+        &:nth-of-type(2n) {
+          background-color: #dbdbdb;
+        }
+      }
+    }
+
+    & td, & th {
+      padding: 2px 2vw;
+      font-size: 15px;
+
+      @media (max-width: $small-mobile-break) {
+        font-size: 12px;
+      }
+
+      &:nth-child(6), &:nth-child(7) {
+        @media (max-width: 800px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

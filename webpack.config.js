@@ -4,7 +4,7 @@ module.exports = {
   context: `${__dirname}/src`,
 
   entry: {
-    js: './index.jsx',
+    bundle: './index.jsx',
     style: './assets/style/main.scss',
   },
 

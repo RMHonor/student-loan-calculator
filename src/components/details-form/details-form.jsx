@@ -37,7 +37,7 @@ const inputFields = [
       type: 'number',
       label: 'Loan balance',
       preAddOn: '£',
-      placeholder: 'Current balance of your loan',
+      placeholder: 'Current loan balance',
       onFocus: () => {
       },
     },
@@ -87,7 +87,7 @@ class DetailsForm extends Component {
 
   renderFields() {
     const dropdownOptions = [];
-    for (let i = 2015; i < new Date().getFullYear() + 3; i += 1) {
+    for (let i = 2015; i <= new Date().getFullYear(); i += 1) {
       dropdownOptions.push({ value: i, label: i });
     }
     return (
@@ -141,7 +141,5 @@ function mapStateToProps({ calculator }) {
 export default reduxForm({
   validate,
   form: 'form',
-  initialValues: {
-    ...getDefaultInputValues(),
-  },
+  initialValues: getDefaultInputValues(),
 })(connect(mapStateToProps, { calculate })(DetailsForm));
