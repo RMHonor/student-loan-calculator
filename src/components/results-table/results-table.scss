@@ -26,6 +26,10 @@
 
     & tbody {
       & tr {
+        &:hover {
+          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        }
+
         &:nth-of-type(2n + 1) {
           background-color: white;
         }
