@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import paintGraph from './paint-graph';
+
 class ResultsGraph extends Component {
   renderPaidOffDate(data) {
     const monthNames = [
@@ -31,11 +33,25 @@ class ResultsGraph extends Component {
     );
   }
 
+  componentDidMount() {
+    paintGraph(this.svgNode);
+  }
+
+  componentDidUpdate() {
+    paintGraph(this.svgNode);
+  }
+
   render() {
     return (
       <div className="row results-graph">
         <div className="col-md-8">
-          Graph
+          <div className="results-graph__container">
+            <svg
+              preserveAspectRatio="xMinYMin meet"
+              viewBox="0 0 600 400"
+              ref={(node) => { this.svgNode = node; }}
+            />
+          </div>
         </div>
         <div className="col-md-4">
           {this.renderPaidOffDate(this.props.data)}
