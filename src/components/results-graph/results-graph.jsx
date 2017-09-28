@@ -34,11 +34,11 @@ class ResultsGraph extends Component {
   }
 
   componentDidMount() {
-    paintGraph(this.svgNode);
+    paintGraph(this.svgNode, this.props.data);
   }
 
   componentDidUpdate() {
-    paintGraph(this.svgNode);
+    paintGraph(this.svgNode, this.props.data);
   }
 
   render() {
