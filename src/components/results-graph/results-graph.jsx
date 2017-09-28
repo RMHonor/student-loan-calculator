@@ -4,6 +4,14 @@ import { connect } from 'react-redux';
 import paintGraph from './paint-graph';
 
 class ResultsGraph extends Component {
+  componentDidMount() {
+    paintGraph(this.svgNode, this.props.data);
+  }
+
+  componentDidUpdate() {
+    paintGraph(this.svgNode, this.props.data);
+  }
+
   renderPaidOffDate(data) {
     const monthNames = [
       'January',
@@ -31,14 +39,6 @@ class ResultsGraph extends Component {
         ({years} years and {months} months)
       </p>
     );
-  }
-
-  componentDidMount() {
-    paintGraph(this.svgNode, this.props.data);
-  }
-
-  componentDidUpdate() {
-    paintGraph(this.svgNode, this.props.data);
   }
 
   render() {
