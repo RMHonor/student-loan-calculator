@@ -64,6 +64,8 @@
     "babel-preset-stage-1": "^6.24.1",
     "bootstrap-grid": "^2.0.1",
     "classnames": "^2.2.5",
+    "d3-axis": "^1.0.8",
+    "d3-scale": "^1.0.6",
     "d3-selection": "^1.1.0",
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
