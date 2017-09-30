@@ -5,11 +5,11 @@ import paintGraph from './paint-graph';
 
 class ResultsGraph extends Component {
   componentDidMount() {
-    paintGraph(this.svgNode, this.props.data);
+    paintGraph(this.svgNode, this.props.data, 1.6);
   }
 
   componentDidUpdate() {
-    paintGraph(this.svgNode, this.props.data);
+    paintGraph(this.svgNode, this.props.data, 1.6);
   }
 
   renderPaidOffDate(data) {
@@ -48,7 +48,6 @@ class ResultsGraph extends Component {
           <div className="results-graph__container">
             <svg
               preserveAspectRatio="xMinYMin meet"
-              viewBox="0 0 600 400"
               ref={(node) => { this.svgNode = node; }}
             />
           </div>
