@@ -34,12 +34,14 @@ export function calculateMonthBalanceChange(balance, payment, interest) {
 }
 
 export function getMonthData(
-  month,
+  date,
   balance,
   salary,
   lowerThreshold,
   upperThreshold,
   inflation,
+  totalPaid,
+  totalInterest,
   prePayment,
 ) {
   let paid = getMonthlyPayment(salary, lowerThreshold);
@@ -56,141 +58,123 @@ export function getMonthData(
   const interestEarned = newBalance - (balance - paid);
 
   return {
-    month,
+    date,
+    salary,
     balance: newBalance,
     paid,
+    totalPaid: totalPaid + paid,
     interestEarned,
     interestRate,
+    totalInterest: totalInterest + interestEarned,
+    thresholds: {
+      lower: lowerThreshold,
+      upper: upperThreshold,
+    },
   };
 }
 
-export function getYearData(
-  year,
-  start,
-  balance,
-  salary,
-  lowerThreshold,
-  upperThreshold,
-  aprRPI,
-  septRPI,
-  prePayment,
-) {
-  const res = {
-    months: [],
-    salary,
-    upperThreshold,
-    lowerThreshold,
-  };
+export function getAnnualSummaries(data) {
+  const startMonth = data[0].date.getMonth() - 3;
 
-  const months = [
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-    'January',
-    'February',
-    'March',
-  ];
+  const getYearSummary = (months) => ({
+    years: months[0].date.getFullYear() === months[months.length - 1].date.getFullYear()
+      ? String(months[0].date.getFullYear())
+      : `${months[0].date.getFullYear()}/${months[months.length - 1].date.getFullYear()}`,
+    endingBalance: months[months.length - 1].balance,
+    interestRate: {
+      april: months[0].interestRate,
+      september: months[0].interestRate,
+    },
+    months,
+    paid: months.reduce((acc, { paid }) => acc + paid, 0),
+    interest: months.reduce((acc, { interestEarned }) => acc + interestEarned, 0),
+    salary: months[0].salary,
+    thresholds: months[0].thresholds,
+    totalPaid: months[months.length - 1].totalPaid,
+    totalInterest: months[months.length - 1].totalInterest,
+  });
 
-  for (let i = start; i < 12; i += 1) {
-    const prevBalance = (res.months[i - 1] && res.months[i - 1].balance) || balance;
-    const inflation = i < 6 ? aprRPI : septRPI;
-
-    if (prePayment) {
-      res.months.push(getMonthData(months[i], prevBalance, 0, 0, 0, inflation));
+  const groupedMonths = data.reduce((acc, month, i) => {
+    const yearIndex = Math.floor((i + startMonth) / 12);
+    if (acc[yearIndex]) {
+      acc[yearIndex].push(month);
     } else {
-      res.months.push(
-        getMonthData(months[i], prevBalance, salary, lowerThreshold, upperThreshold, inflation),
-      );
+      acc[yearIndex] = [month];
     }
+    return acc;
+  }, new Array(Math.ceil(data.length / 12)));
 
-    if (res.months[res.months.length - 1].balance === 0) {
-      break;
-    }
-  }
-
-  res.paid = res.months.reduce((acc, { paid }) => acc + paid, 0);
-  res.interest = res.months.reduce((acc, { interestEarned }) => acc + interestEarned, 0);
-  res.endingBalance = res.months[res.months.length - 1].balance;
-  res.years = `${year}/${(year + 1) % 2000}`;
-
-  return res;
+  return groupedMonths.map(months => getYearSummary(months));
 }
 
 export default function getLoanData(balance, salary, salaryIncrease, gradYear, loanTermsData) {
-  const response = [];
+  const months = [];
 
   const now = new Date();
   let year = now.getFullYear();
-  let month = (now.getMonth() + 9) % 12;
+  let month = now.getMonth();
   let currentSalary = salary;
 
-  // calculate balance up until april following graduation
-  if (now.getFullYear() === gradYear
-    || (now.getFullYear() - 1 === gradYear && month > 9)
-  ) {
-    const startYear = (now.getFullYear() - 1 === gradYear && month > 9)
-      ? now.getFullYear() - 1
-      : now.getFullYear();
-    const aprRPI = loanTermsData.find(o => o.year === now.getFullYear() - 1).rpi;
-    const septRPI = loanTermsData.find(o => o.year === now.getFullYear()).rpi;
-
-    response.push(getYearData(
-      startYear,
-      month,
-      balance,
-      currentSalary,
-      0,
-      1,
-      aprRPI,
-      septRPI,
-      true,
-    ));
-
-    currentSalary = getSalaryIncrease(salary, salaryIncrease);
-    month = 0;
-    year += 1;
-  }
-
-  for (let i = year; i < gradYear + 31; i += 1) {
-    const newBalance =
-      response[response.length - 1] ? response[response.length - 1].endingBalance : balance;
-    if (newBalance === 0) {
-      break;
+  const isPrePayment = (graduationYear, date) => (
+    date.getFullYear() === graduationYear ||
+    (date.getFullYear() - 1 === graduationYear && date.getMonth() < 4)
+  );
+  const getCurrentLoanTerms = (date) => {
+    const searchDate = date.getFullYear() - ((date.getMonth() < 3) ? 1 : 0);
+    const res = Object.assign({}, loanTermsData.find(terms => terms.year === searchDate));
+    //if september, get new rpi
+    if (date.getMonth() > 7) {
+      res.rpi = loanTermsData.find(terms => terms.year === date.getFullYear()).rpi;
     }
-    const currentLoanTerms = loanTermsData.find(o => o.year === i);
-    const aprRPI = loanTermsData.find(o => o.year === i - 1).rpi;
 
-    response.push(getYearData(
-      i,
-      month,
-      newBalance,
-      currentSalary,
-      currentLoanTerms.lowerThreshold,
-      currentLoanTerms.upperThreshold,
-      aprRPI,
-      currentLoanTerms.rpi,
-      false,
-    ));
+    return res;
+  };
 
-    currentSalary = getSalaryIncrease(currentSalary, salaryIncrease);
+  for (year; year < gradYear + 32; year += 1) {
+    for (month; month < 12; month += 1) {
+      //break if april of final payment year or balance is 0
+      if (
+        (year === gradYear + 31 && month === 3) ||
+        (months.length && months[months.length - 1]).balance === 0
+      ) {
+        break;
+      }
+
+      //update loan terms and salary
+      if (month === 3) {
+        currentSalary = getSalaryIncrease(currentSalary, salaryIncrease);
+      }
+
+      const monthDate = new Date(year, month);
+      let totalPaid = 0;
+      let totalInterest = 0;
+      let currentBalance = balance;
+      const currentTerms = getCurrentLoanTerms(monthDate);
+
+      if (months.length) {
+        const latestMonth = months[months.length - 1];
+        totalPaid = latestMonth.totalPaid;
+        totalInterest = latestMonth.totalInterest;
+        currentBalance = latestMonth.balance;
+      }
+
+      months.push(getMonthData(
+        monthDate,
+        currentBalance,
+        currentSalary,
+        currentTerms.lowerThreshold,
+        currentTerms.upperThreshold,
+        currentTerms.rpi,
+        totalPaid,
+        totalInterest,
+        isPrePayment(gradYear, monthDate),
+      ));
+    }
     month = 0;
   }
 
-  for (let i = 0; i < response.length; i += 1) {
-    if (response[i - 1]) {
-      response[i].totalPaid = response[i - 1].totalPaid + response[i].paid;
-      response[i].totalInterest = response[i - 1].totalInterest + response[i].interest;
-    } else {
-      response[i].totalPaid = response[i].paid;
-      response[i].totalInterest = response[i].interest;
-    }
-  }
-
-  return response;
+  return {
+    months,
+    years: getAnnualSummaries(months),
+  };
 }
