@@ -29,12 +29,12 @@ const HISTORIC_RPI = [
 
 // assumed future RPI
 const FUTURE_RPI = {
-  rpi: 2,
+  rpi: 2.5,
 };
 
 /**
  * Returns the historic and future terms of student loans:
- * RPI - inflation based interest rate
+ * RPI - inflation
  * Lower threshold - salary at which one has to pay student loan installments
  * Upper threshold - salary at which interest rate stops rising
  */
