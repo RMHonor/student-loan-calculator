@@ -22,7 +22,7 @@ function ResultsTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.data.map(year => (
+          {props.data.years.map(year => (
             <tr key={year.years}>
               <td>{year.years}</td>
               <td>£{Math.round(year.endingBalance)}</td>
