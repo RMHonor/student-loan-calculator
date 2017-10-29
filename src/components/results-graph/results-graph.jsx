@@ -27,8 +27,8 @@ class ResultsGraph extends Component {
       'November',
       'December',
     ];
-    const years = data.length - 1;
-    const months = data[data.length - 1].months.length;
+    const years = Math.floor(data.months.length / 12);
+    const months = (data.months.length % 12) - 1;
 
     const now = new Date();
     const finishDate = new Date(now.getFullYear() + years, now.getMonth() + months);
