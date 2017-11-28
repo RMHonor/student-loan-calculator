@@ -8,7 +8,7 @@ export default (props) => {
     responsiveClass,
     label,
     defaultVal,
-    ...config
+    name,
   } = props;
 
   let element;
@@ -26,7 +26,7 @@ export default (props) => {
   return (
     <div className={responsiveClass}>
       <div className="field">
-        <label htmlFor={config.name} className="field__label">{props.label}</label>
+        <label htmlFor={name} className="field__label">{props.label}</label>
         <div className={containerClass} >
           <select className={inputClass} {...input} >
             <option disabled hidden value="">{defaultVal}</option>

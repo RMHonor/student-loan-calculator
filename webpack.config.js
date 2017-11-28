@@ -9,7 +9,7 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     path: `${__dirname}/dist`,
     publicPath: '/',
   },

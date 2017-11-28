@@ -1,0 +1,13 @@
+.results-graph {
+
+  &__container {
+    width: 95%;
+    max-width: 900px;
+    margin: 35px auto 0 auto;
+  }
+
+  &__caption {
+    font-size: 20px;
+    text-align: center;
+  }
+}

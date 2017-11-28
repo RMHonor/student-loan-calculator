@@ -7,6 +7,7 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 
 import Form from './components/details-form/details-form';
+import ResultsGraph from './components/results-graph/results-graph';
 import ResultsTable from './components/results-table/results-table';
 
 import './index.scss';
@@ -24,6 +25,7 @@ ReactDOM.render(
         <h1 className="heading__h1 padding--10">Student Loan Calculator</h1>
       </div>
       <Form />
+      <ResultsGraph />
       <ResultsTable />
     </div>
   </Provider>,
