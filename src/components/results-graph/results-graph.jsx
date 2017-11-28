@@ -3,13 +3,17 @@ import { connect } from 'react-redux';
 
 import paintGraph from './paint-graph';
 
+import './results-graph.scss';
+
+const CHART_ID = 'chart-container';
+
 class ResultsGraph extends Component {
-  componentDidMount() {
-    // paintGraph(this.svgNode, this.props.data, 1.6);
-  }
+  // componentDidMount() {
+  //   paintGraph(CHART_ID, this.props.data.months);
+  // }
 
   componentDidUpdate() {
-    // paintGraph(this.svgNode, this.props.data, 1.6);
+    paintGraph(CHART_ID, this.props.data.months);
   }
 
   renderPaidOffDate(data) {
@@ -44,17 +48,10 @@ class ResultsGraph extends Component {
   render() {
     if (!this.props.data) return null;
 
-    console.log(this.props.data);
-
     return (
       <div className="row results-graph">
         <div className="col-md-8">
-          <div className="results-graph__container">
-            <svg
-              preserveAspectRatio="xMinYMin meet"
-              ref={(node) => { this.svgNode = node; }}
-            />
-          </div>
+          <div id={CHART_ID} className="results-graph__container" />
         </div>
         <div className="col-md-4">
           {this.renderPaidOffDate(this.props.data)}
