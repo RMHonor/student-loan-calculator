@@ -16,7 +16,10 @@ export default function (selectorID, data) {
     },
     yAxis: {
       title: {
-        text: 'Balance (£)',
+        enabled: false,
+      },
+      labels: {
+        format: '£{value}',
       },
     },
     tooltip: {
