@@ -16,16 +16,22 @@ export default function (selectorID, data) {
     },
     yAxis: {
       title: {
-        text: 'Balance',
+        text: 'Balance (£)',
       },
+    },
+    tooltip: {
+      xDateFormat: '%B %Y',
+      valuePrefix: '£',
+      shared: true,
+      valueDecimals: 0,
     },
     series: [
       {
-        data: data.map(month => [month.date.getTime(), Math.floor(month.balance)]),
+        data: data.map(month => [month.date.getTime(), month.balance]),
         name: 'Balance',
       },
       {
-        data: data.map(month => [month.date.getTime(), Math.floor(month.totalPaid)]),
+        data: data.map(month => [month.date.getTime(), month.totalPaid]),
         name: 'Total paid',
       },
     ],
