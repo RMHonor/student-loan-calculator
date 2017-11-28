@@ -5,11 +5,11 @@ import paintGraph from './paint-graph';
 
 class ResultsGraph extends Component {
   componentDidMount() {
-    paintGraph(this.svgNode, this.props.data, 1.6);
+    // paintGraph(this.svgNode, this.props.data, 1.6);
   }
 
   componentDidUpdate() {
-    paintGraph(this.svgNode, this.props.data, 1.6);
+    // paintGraph(this.svgNode, this.props.data, 1.6);
   }
 
   renderPaidOffDate(data) {
@@ -34,14 +34,18 @@ class ResultsGraph extends Component {
     const finishDate = new Date(now.getFullYear() + years, now.getMonth() + months);
 
     return (
-      <p className="results-graph__text">
+      <span className="results-graph__text">
         Your loan will be paid off by {monthNames[finishDate.getMonth()]} {finishDate.getFullYear()}
         ({years} years and {months} months)
-      </p>
+      </span>
     );
   }
 
   render() {
+    if (!this.props.data) return null;
+
+    console.log(this.props.data);
+
     return (
       <div className="row results-graph">
         <div className="col-md-8">
