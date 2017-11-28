@@ -6,7 +6,7 @@ export default function (selectorID, data) {
       type: 'line',
     },
     title: {
-      text: 'Balance over time',
+      text: 'Loan over time',
     },
     xAxis: {
       title: {
