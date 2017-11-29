@@ -1,3 +1,10 @@
 machine:
   node:
     version: 8.9
+jobs:
+   build:
+     steps:
+       - checkout
+       - run: npm install
+       - run: npm test
+       - run: npm run lint
