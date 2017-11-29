@@ -9,7 +9,7 @@ const CHART_ID = 'chart-container';
 
 class ResultsGraph extends Component {
   componentDidUpdate() {
-    paintGraph(CHART_ID, this.props.data.months);
+    paintGraph(CHART_ID, this.props.data);
   }
 
   getPaidOffDateText(data) {
@@ -46,7 +46,7 @@ class ResultsGraph extends Component {
       <div className="results-graph">
         <figure>
           <figcaption className="results-graph__caption">
-            {this.getPaidOffDateText(this.props.data.months)}
+            {this.getPaidOffDateText(this.props.data)}
           </figcaption>
           <div id={CHART_ID} className="results-graph__container" />
         </figure>
@@ -56,7 +56,7 @@ class ResultsGraph extends Component {
 }
 
 function mapStateToProps({ calculator }) {
-  return { data: calculator };
+  return { data: calculator && calculator.months };
 }
 
 export default connect(mapStateToProps)(ResultsGraph);
