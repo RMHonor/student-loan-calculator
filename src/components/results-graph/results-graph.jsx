@@ -12,7 +12,7 @@ class ResultsGraph extends Component {
     paintGraph(CHART_ID, this.props.data.months);
   }
 
-  getPaidOffDateString(data) {
+  getPaidOffDateText(data) {
     const monthNames = [
       'January',
       'February',
@@ -27,10 +27,14 @@ class ResultsGraph extends Component {
       'November',
       'December',
     ];
+
     const years = Math.floor(data.length / 12);
-    const months = (data.length - 2) % 12;
+    const months = (data.length - 1) % 12;
+
     return `
-        Your loan will be paid off by ${monthNames[data[0].date.getMonth()]} ${data[0].date.getFullYear()}
+        Your loan will be paid off by 
+        ${monthNames[data[data.length - 1].date.getMonth()]} 
+        ${data[data.length - 1].date.getFullYear()}
         (${years} years and ${months} month${months !== 1 ? 's' : ''})
       `;
   }
@@ -42,7 +46,7 @@ class ResultsGraph extends Component {
       <div className="results-graph">
         <figure>
           <figcaption className="results-graph__caption">
-            {this.getPaidOffDateString(this.props.data.months)}
+            {this.getPaidOffDateText(this.props.data.months)}
           </figcaption>
           <div id={CHART_ID} className="results-graph__container" />
         </figure>
