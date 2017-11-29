@@ -44,11 +44,11 @@ class ResultsGraph extends Component {
 
     return (
       <div className="results-graph">
-        <figure>
+        <figure className="results-graph__container" >
           <figcaption className="results-graph__caption">
             {this.getPaidOffDateText(this.props.data)}
           </figcaption>
-          <div id={CHART_ID} className="results-graph__container" />
+          <div id={CHART_ID} />
         </figure>
       </div>
     );
