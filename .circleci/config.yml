@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
@@ -15,6 +16,7 @@ jobs:
           paths:
             - node_modules
   test:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
@@ -23,6 +25,7 @@ jobs:
           name: Test
           command: npm test
   lint:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
