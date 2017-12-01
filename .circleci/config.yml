@@ -6,8 +6,7 @@ jobs:
     steps:
        - checkout
        - run: npm install
-       - run: export CHROME_BIN=google-chrome
-       - run: npm test
+       - run: CHROME_BIN=google-chrome npm test
        - run: npm run lint
 
 workflows:
