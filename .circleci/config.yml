@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/project
+    working_directory: /project
     docker:
       - image: circleci/node:8.9
     steps:
@@ -16,12 +16,12 @@ jobs:
           paths:
             - node_modules
       - persist_to_workspace:
-          root: ~/project
+          root: /project
           paths:
             - node_modules
   test:
     - attach_workspace:
-        at: ~/project
+        at: /project
     docker:
       - image: circleci/node:8.9
     steps:
