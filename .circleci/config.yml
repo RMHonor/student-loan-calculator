@@ -12,7 +12,7 @@ jobs:
           command: npm install
       - run:
           name: Install global packages
-          command: npm i -g eslint karma
+          command: sudo npm i -g eslint karma
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
