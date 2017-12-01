@@ -19,24 +19,23 @@ jobs:
           root: ~/project
           paths: node_modules
   test:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/project
       - run:
           name: Test
-          command: ls
-#  lint:
-#    working_directory: ~/project
-#    docker:
-#      - image: circleci/node:8.9
-#    steps:
-#      - checkout
-#      - run:
-#          name: ESLint
-#          command: npm run lint
+          command: npm test
+  lint:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8.9
+    steps:
+      - checkout
+      - run:
+          name: ESLint
+          command: npm run lint
 
 workflows:
   version: 2
