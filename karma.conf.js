@@ -7,8 +7,6 @@ const chromeLauncher = require('karma-chrome-launcher');
 
 const webpackConf = require('./webpack.config');
 
-process.env.CHROME_BIN = require('puppeteer').executablePath()
-
 module.exports = (config) => {
   config.set({
     basePath: './src',
@@ -39,6 +37,6 @@ module.exports = (config) => {
       noInfo: true,
     },
 
-    browsers: ['ChromeHeadless'],
+    browsers: ['Chrome'],
   });
 };
