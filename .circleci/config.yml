@@ -16,9 +16,9 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:8.9
+#      - image: circleci/node:8.9
     steps:
-      - checkout
+#      - checkout
       - run:
           name: Test
           command: npm test
