@@ -15,8 +15,13 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules
   test:
-    working_directory: ~/project
+    - attach_workspace:
+        at: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
