@@ -20,9 +20,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install global packages
-          command: sudo npm i -g eslint karma
-      - run:
           name: Test
           command: npm test
   lint:
