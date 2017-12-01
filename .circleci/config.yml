@@ -39,6 +39,6 @@ workflows:
       - test:
         requires:
           - build
-      - lint:
-        requires:
-          - build
+#      - lint:
+#        requires:
+#          - build
