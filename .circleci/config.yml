@@ -17,6 +17,8 @@ jobs:
             - node_modules
   test:
     working_directory: ~/project
+    - attach_workspace:
+        at: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
@@ -26,6 +28,8 @@ jobs:
           command: npm test
   lint:
     working_directory: ~/project
+    - attach_workspace:
+        at: ~/project
     docker:
       - image: circleci/node:8.9
     steps:
