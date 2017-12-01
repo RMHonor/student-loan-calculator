@@ -22,9 +22,9 @@ jobs:
     docker:
       - image: circleci/node:8.9
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project
-      - checkout
       - run:
           name: Test
           command: ls
