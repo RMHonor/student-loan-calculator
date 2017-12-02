@@ -35,7 +35,7 @@ class ResultsGraph extends Component {
         Your loan will be paid off by 
         ${monthNames[data[data.length - 1].date.getMonth()]} 
         ${data[data.length - 1].date.getFullYear()}
-        (${years} years and ${months} month${months !== 1 ? 's' : ''})
+        (${years} years${months ? ` and ${months} month` : ''}${months > 1 ? 's' : ''})
       `;
   }
 
