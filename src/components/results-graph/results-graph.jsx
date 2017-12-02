@@ -45,7 +45,7 @@ class ResultsGraph extends Component {
     return (
       <div className="results-graph">
         <figure className="results-graph__container" >
-          <figcaption className="results-graph__caption">
+          <figcaption className="results-graph__caption margin--bottom--35">
             {this.getPaidOffDateText(this.props.data)}
           </figcaption>
           <div id={CHART_ID} />
