@@ -4,7 +4,7 @@
   "description": "React app for calculating student loan repayments and debt projection",
   "main": "src/index.jsx",
   "scripts": {
-    "testl": "./node_modules/jest/bin/jest.js",
+    "test": "./node_modules/jest/bin/jest.js",
     "lint": "./node_modules/eslint/bin/eslint.js ./webpack.config.js ./jest.config.js ./src/**/*.jsx ./src/**/*.js",
     "start": "webpack-dev-server --hot --inline --https",
     "build": "webpack"
