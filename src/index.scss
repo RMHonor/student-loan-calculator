@@ -1,16 +1,16 @@
 @import './assets/style/settings/colours';
 
 .heading {
-  border-top-left-radius: inherit;
   border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
 
   &__h1 {
-    border-radius: inherit;
-    text-align: center;
     margin: 0;
     font-weight: 400;
     letter-spacing: 1.5px;
-    color: white;
-    background-color: $primary-blue;
+    color: $white;
+    text-align: center;
+    background-color: $color-curious-blue;
+    border-radius: inherit;
   }
 }

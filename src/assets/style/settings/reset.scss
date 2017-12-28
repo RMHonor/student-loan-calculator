@@ -10,26 +10,26 @@
   padding: 0;
 }
 
-div[class^="col-"] {
+[class^='col-'] {
   padding: 0;
 }
 
 input {
   padding: 0;
   border: none;
-}
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  &[type='number'] {
+    -moz-appearance: textfield;
 
-input[type=number] {
-  -moz-appearance:textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+  }
 }
 
 table {
-  border-spacing: 0;
   border-collapse: collapse;
+  border-spacing: 0;
 }
