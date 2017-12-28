@@ -5,14 +5,11 @@
   "main": "src/index.jsx",
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js",
-    "lint": "./node_modules/eslint/bin/eslint.js ./webpack.config.js ./jest.config.js ./src/**/*.jsx ./src/**/*.js",
+    "eslint": "./node_modules/eslint/bin/eslint.js ./webpack.config.js ./jest.config.js ./src/**/*.jsx ./src/**/*.js",
+    "sasslint": "sass-lint -c ./sass-lint.yml ./src/**/*.scss -v",
     "start": "webpack-dev-server --hot --inline --https",
     "build": "webpack"
   },
-  "pre-commit": [
-    "test",
-    "lint"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RMHonor/student-loan-calculator.git"
@@ -27,6 +24,7 @@
   },
   "homepage": "https://github.com/RMHonor/student-loan-calculator#readme",
   "devDependencies": {
+    "autoprefixer": "^7.2.3",
     "babel-core": "^6.25.0",
     "babel-jest": "^22.0.4",
     "babel-loader": "^7.1.1",
@@ -52,7 +50,9 @@
     "jest": "^22.0.4",
     "jest-junit": "^3.4.1",
     "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.9",
     "regenerator-runtime": "^0.11.1",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.2.0",
