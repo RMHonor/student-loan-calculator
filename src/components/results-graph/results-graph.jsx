@@ -32,8 +32,8 @@ class ResultsGraph extends Component {
     const months = (data.length - 1) % 12;
 
     return `
-        Your loan will be paid off by 
-        ${monthNames[data[data.length - 1].date.getMonth()]} 
+        Your loan will be paid off by
+        ${monthNames[data[data.length - 1].date.getMonth()]}
         ${data[data.length - 1].date.getFullYear()}
         (${years} years${months ? ` and ${months} month` : ''}${months > 1 ? 's' : ''})
       `;

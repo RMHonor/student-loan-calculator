@@ -4,16 +4,12 @@
   "description": "React app for calculating student loan repayments and debt projection",
   "main": "src/index.jsx",
   "scripts": {
-    "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
-    "test:watch": "karma start ./karma.conf.js",
-    "lint": "eslint ./webpack.config.js ./src/**/*.jsx ./src/**/*.js",
+    "test": "./node_modules/jest/bin/jest.js",
+    "eslint": "./node_modules/eslint/bin/eslint.js ./webpack.config.js ./jest.config.js ./src/**/*.jsx ./src/**/*.js",
+    "sasslint": "sass-lint -c ./sass-lint.yml ./src/**/*.scss -v",
     "start": "webpack-dev-server --hot --inline --https",
     "build": "webpack"
   },
-  "pre-commit": [
-    "test",
-    "lint"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RMHonor/student-loan-calculator.git"
@@ -28,7 +24,9 @@
   },
   "homepage": "https://github.com/RMHonor/student-loan-calculator#readme",
   "devDependencies": {
+    "autoprefixer": "^7.2.3",
     "babel-core": "^6.25.0",
+    "babel-jest": "^22.0.4",
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
@@ -47,17 +45,14 @@
     "eslint-watch": "^3.1.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
+    "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine-core": "^2.8.0",
-    "karma": "^1.7.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.4",
-    "karma-webpack": "^2.0.4",
-    "mocha": "^3.5.0",
+    "jest": "^22.0.4",
+    "jest-junit": "^3.4.1",
     "node-sass": "^4.5.3",
-    "pre-commit": "^1.2.2",
+    "postcss-loader": "^2.0.9",
+    "regenerator-runtime": "^0.11.1",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.2.0",
