@@ -2,7 +2,7 @@ $placeholder-grey: #797575;
 $border-grey: #CECECE;
 $border-error: #D00;
 $inline-error: #DC0000;
-$background-active: #D3F3F3;
+$background-active: #F3F3F3;
 
 .field {
   width: 300px;
@@ -63,7 +63,7 @@ $background-active: #D3F3F3;
   &__addon {
     padding: 0 10px;
     line-height: 32px;
-    background-color: $color-mercury;
+    background-color: $colour-mercury;
     border: 1px solid $border-grey;
 
     &:first-child {
