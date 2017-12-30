@@ -34,7 +34,7 @@ class ResultsGraph extends Component {
     return `
       ${monthNames[data[data.length - 1].date.getMonth()]}
       ${data[data.length - 1].date.getFullYear()}
-      (${years} years${ months ? ` ${months} month` : ''}${months > 1 ? 's' : ''})
+      (${years} years${months ? ` ${months} month` : ''}${months > 1 ? 's' : ''})
     `;
   }
 
