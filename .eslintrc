@@ -4,7 +4,12 @@
     "no-debugger": "warn",
     "class-methods-use-this": "off",
     "spaced-comment": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "jsx-a11y/label-has-for": [ "error", {
+      "required": {
+          "every": ["id"]
+      }
+    }]
   },
   "env": {
     "browser": true,
