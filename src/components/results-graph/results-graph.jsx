@@ -32,11 +32,10 @@ class ResultsGraph extends Component {
     const months = (data.length - 1) % 12;
 
     return `
-        Your loan will be paid off by
-        ${monthNames[data[data.length - 1].date.getMonth()]}
-        ${data[data.length - 1].date.getFullYear()}
-        (${years} years${months ? ` and ${months} month` : ''}${months > 1 ? 's' : ''})
-      `;
+      ${monthNames[data[data.length - 1].date.getMonth()]}
+      ${data[data.length - 1].date.getFullYear()}
+      (${years} years${ months ? ` ${months} month` : ''}${months > 1 ? 's' : ''})
+    `;
   }
 
   render() {
@@ -46,6 +45,7 @@ class ResultsGraph extends Component {
       <div className="results-graph">
         <figure className="results-graph__container" >
           <figcaption className="results-graph__caption margin--bottom--35">
+            Date of final payment: <br />
             {this.getPaidOffDateText(this.props.data)}
           </figcaption>
           <div id={CHART_ID} />
