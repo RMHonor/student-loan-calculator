@@ -12,10 +12,10 @@ export default (props) => {
     ...config
   } = props;
 
-  let element;
+  const element = 'field__container';
   const containerClass =
     classNames(
-      element = 'field__container',
+      element,
       { [`${element}--error`]: touched && error },
     );
 
