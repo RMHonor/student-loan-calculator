@@ -14,9 +14,10 @@ import './index.scss';
 
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(
-  applyMiddleware(promise),
-));
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(promise)),
+);
 
 ReactDOM.render(
   <Provider store={store}>
