@@ -76,7 +76,7 @@ export function getMonthData(
 export function getAnnualSummaries(data) {
   const startMonth = data[0].date.getMonth() - 3;
 
-  const getYearSummary = (months) => ({
+  const getYearSummary = months => ({
     years: months[0].date.getFullYear() === months[months.length - 1].date.getFullYear()
       ? String(months[0].date.getFullYear())
       : `${months[0].date.getFullYear()}/${months[months.length - 1].date.getFullYear()}`,
