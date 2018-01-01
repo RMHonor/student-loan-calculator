@@ -269,7 +269,7 @@ describe('Loan Calculator', () => {
 
   describe('getLoanData', () => {
     test('should generate 30 years of data', () => {
-      const data = getLoanData(40000, 4000, 3, new Date().getFullYear(), loanTerms(2016, 2047));
+      const data = getLoanData(40000, 4000, 3, 2017, loanTerms(2016, 2047));
 
       //at least 360 months of data
       expect(data.months.length).toBeGreaterThan(359);
