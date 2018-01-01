@@ -20,7 +20,7 @@ jobs:
           command: npm run eslint -- --format junit -o reports/junit/js-lint-results.xml
       - run:
           name: "SCSS Linter"
-          command: npm run sasslint -- --output reports/junit/scss-lint-results.xml
+          command: npm run sasslint
       - run:
           name: "JavaScript Test Suite"
           environment:
