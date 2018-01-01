@@ -43,12 +43,14 @@ class ResultsGraph extends Component {
 
     return (
       <div className="results-graph">
+        <hr />
         <figure className="results-graph__container" >
           <figcaption className="results-graph__caption margin--bottom--35">
             Date of final payment: <br />
             {this.getPaidOffDateText(this.props.data)}
           </figcaption>
-          <div id={CHART_ID} />
+          <hr />
+          <div className="margin--top--25" id={CHART_ID} />
         </figure>
       </div>
     );

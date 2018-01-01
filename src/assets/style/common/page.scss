@@ -2,6 +2,15 @@ body {
   background-color: $colour-mercury;
 }
 
+hr {
+  height: 1px;
+  background-image: linear-gradient(to right,
+    $transparent-100,
+    $transparent-black-50,
+    $transparent-100);
+  border: none;
+}
+
 .container {
   max-width: 90%;
   margin: 25px auto;

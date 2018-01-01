@@ -8,6 +8,7 @@ function ResultsTable(props) {
 
   return (
     <div className="results-table margin--bottom--20">
+      <hr />
       <h2 className="results-table__header">Breakdown</h2>
       <table className="results-table__table">
         <thead>
